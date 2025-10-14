@@ -177,10 +177,7 @@ current_html = """<!doctype html>
   </section>
 </body>
 </html>
-"""
 
-# 1) Insert Voice + QA sections before #shop
-voice_section = """
   <section id="voice_content" class="voice_content">
     <div class="inner">
       <picture class="voiceTitle">
@@ -207,9 +204,7 @@ voice_section = """
       </ul>
     </div>
   </section>
-"""
 
-qa_section = """
   <section id="qa_content" class="qa_content">
     <div class="inner">
       <picture class="qa-img">
@@ -281,11 +276,14 @@ qa_section = """
           <li class="access-area__item">定休日 / 火曜、水曜、GW、夏季休暇、年末年始</li>
         </ul>
       </div>
-      <div class="map" style="text-align:center;">
-        <a class="map-btn" href="https://maps.app.goo.gl/uu4b8K8NXsCAYwnf8" target="_blank" rel="noopener">🗺 Googleマップを開く</a>
-      </div>
-    </div>
-  </section>
+     </div><!--access-area-->
+
+  <div class="map">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d26705.822909636358!2d129.655249!3d33.208122!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x356a94b5bb0234ef%3A0x241d17ad3ecbb358!2z5pel5pys44CB44CSODU4LTA5MDcg6ZW35bSO55yM5L2Q5LiW5L-d5biC5qOa5pa555S677yS77yQ77yX4oiS77yR77yW!5e0!3m2!1sja!2sus!4v1577165868554!5m2!1sja!2sus" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    
+  </div>
+</div><!--inner-->
+</section><!--shop-->
 
   <footer id="footer" class="footer">
     <div class="logo"><img src="images/footer-logo.svg" alt="フッターロゴ"></div>
