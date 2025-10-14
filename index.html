@@ -59,6 +59,72 @@
     }
     /* 疑似要素の＋/−を消す（既存アイコン画像だけ表示） */
 .qa_content .qa__item--open::after { content: none !important; }
+    /* ===== キャンペーン帯（見出し＋時間）を“元サイト寄り”に調整 ===== */
+#campaign { background: var(--kobac-red, #E60012); color: #fff; }
+
+/* 白い帯の店名（中央で太く） */
+#campaign .store02title { text-align: center; margin: 0 0 12px; }
+#campaign .store02title span{
+  display: inline-block;
+  background: #fff;
+  color: #111;
+  font-weight: 900;               /* 太く */
+  letter-spacing: .06em;
+  padding: 8px 24px;
+  border-radius: 2px;
+  line-height: 1.2;
+  font-size: clamp(18px, 2.3vw, 30px);
+}
+
+/* 「作業受付時間」＋ 時刻 の横並びとセンター寄せ */
+#campaign .campaign__time{
+  display: flex;
+  align-items: center;
+  justify-content: center;        /* センター寄せ */
+  gap: clamp(16px, 6vw, 56px);    /* 左ラベルとの間隔 */
+  margin: 0 auto;
+}
+
+/* 左のラベル（細め→中太、下に白いライン） */
+#campaign .campaign__time-text{
+  font-weight: 700;
+  letter-spacing: .2em;
+  font-size: clamp(14px, 1.8vw, 20px);
+  position: relative;
+  text-align: center;
+}
+#campaign .campaign__time-text::after{
+  content:"";
+  display:block;
+  width: clamp(120px, 18vw, 260px);
+  height: 2px;
+  background: rgba(255,255,255,.85);
+  margin: 10px auto 0;
+}
+
+/* 右の時刻（超太・数字幅を等幅化・上下中央に“ドン”） */
+#campaign .campaign__time-number{
+  margin: 0;
+  line-height: 1;                 /* 余白を詰める */
+  font-weight: 900;               /* 太く */
+  letter-spacing: .08em;
+  font-size: clamp(44px, 10vw, 120px);
+  font-variant-numeric: tabular-nums; /* 数字幅を揃える */
+  text-align: center;
+  text-rendering: optimizeLegibility;
+}
+
+/* スマホはやや詰め気味に */
+@media (max-width: 767px){
+  #campaign .campaign__time{
+    flex-direction: column;
+    gap: 10px;
+  }
+  #campaign .campaign__time-number{
+    font-size: clamp(40px, 14vw, 72px);
+    letter-spacing: .04em;
+  }
+}
   </style>
 </head>
 
