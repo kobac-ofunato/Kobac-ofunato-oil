@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_レイヤー_2" data-name="レイヤー 2" xmlns="http://www.w3.org/2000/svg" width="1920" height="1414.49" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 1414.49">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#_新規パターン_2);
+      }
+
+      .cls-1, .cls-2 {
+        fill-rule: evenodd;
+      }
+
+      .cls-3 {
+        fill: #fcbf31;
+      }
+
+      .cls-2 {
+        fill: url(#_名称未設定グラデーション_68);
+      }
+
+      .cls-4 {
+        fill: none;
+      }
+
+      .cls-5 {
+        fill: #ff731e;
+      }
+    </style>
+    <linearGradient id="_名称未設定グラデーション_68" data-name="名称未設定グラデーション 68" x1="960" y1="5.92" x2="960" y2="281.69" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fcbf31"/>
+      <stop offset="1" stop-color="#ff731e"/>
+    </linearGradient>
+    <pattern id="_新規パターン_2" data-name="新規パターン 2" x="0" y="0" width="28.16" height="28.16" patternTransform="translate(684.27 -1196.54)" patternUnits="userSpaceOnUse" viewBox="0 0 28.16 28.16">
+      <g>
+        <rect class="cls-4" width="28.16" height="28.16"/>
+        <g>
+          <g>
+            <circle class="cls-5" cx="7.04" cy="7.04" r="5"/>
+            <rect class="cls-4" x="0" y="0" width="14.08" height="14.08"/>
+          </g>
+          <g>
+            <circle class="cls-5" cx="21.12" cy="21.12" r="5"/>
+            <rect class="cls-4" x="14.08" y="14.08" width="14.08" height="14.08"/>
+          </g>
+        </g>
+        <rect class="cls-4" x="0" y="0" width="28.16" height="28.16"/>
+      </g>
+    </pattern>
+  </defs>
+  <g id="_背景" data-name="背景">
+    <g>
+      <rect class="cls-3" width="1920" height="1414.49"/>
+      <g>
+        <polygon class="cls-2" points="960.38 686 0 40 0 0 1920 0 1920 40 960.38 686"/>
+        <polygon class="cls-1" points="960.38 686 0 40 0 0 1920 0 1920 40 960.38 686"/>
+      </g>
+    </g>
+  </g>
+</svg>
