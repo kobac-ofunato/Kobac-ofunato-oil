@@ -1,4 +1,16 @@
-<!doctype html>
+from pathlib import Path
+import re
+from textwrap import dedent
+from zipfile import ZipFile
+from urllib.parse import quote
+
+# Working folder
+out_dir = Path("/mnt/data/kobac-oofunato-final")
+out_dir.mkdir(parents=True, exist_ok=True)
+index_path = out_dir / "index.html"
+
+# Paste the user's current HTML
+current_html = """<!doctype html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -193,3 +205,120 @@
   <a href="tel:0120-589-196" class="sticky-tel">📞 今すぐ電話</a>
 </body>
 </html>
+"""
+
+# 1) Insert Voice + QA sections before #shop
+voice_section = """
+  <section id="voice_content" class="voice_content">
+    <div class="inner">
+      <picture class="voiceTitle">
+        <source srcset="images/voice_content.svg" media="(min-width: 768px)"/>
+        <img src="images/voice_content.svg" alt="お客様の声">
+      </picture>
+      <ul>
+        <li>
+          <img src="images/voice01.svg" class="is-pc" alt="お客様の声1">
+          <img src="images/voice01_sp.svg" class="is-sp" alt="お客様の声1">
+        </li>
+        <li>
+          <img src="images/voice02.svg" class="is-pc" alt="お客様の声2">
+          <img src="images/voice02_sp.svg" class="is-sp" alt="お客様の声2">
+        </li>
+        <li>
+          <img src="images/voice03.svg" class="is-pc" alt="お客様の声3">
+          <img src="images/voice03_sp.svg" class="is-sp" alt="お客様の声3">
+        </li>
+        <li>
+          <img src="images/voice04.svg" class="is-pc" alt="お客様の声4">
+          <img src="images/voice04_sp.svg" class="is-sp" alt="お客様の声4">
+        </li>
+      </ul>
+    </div>
+  </section>
+"""
+
+qa_section = """
+  <section id="qa_content" class="qa_content">
+    <div class="inner">
+      <picture class="qa-img">
+        <source srcset="images/qa_content.svg" media="(min-width: 768px)"/>
+        <img src="images/qa_content.svg" alt="よくある質問">
+      </picture>
+      <h2 class="qaTitle">皆様から頂くよくあるご質問をまとめました。<br>その他ご質問やご不明点がございましたら<br class="is-sp">何なりとお申し付けください。</h2>
+      <div class="qa-content">
+        <ul>
+          <li>
+            <div class="qa__item-question">
+              <div class="qa__item-question-p"><img src="images/q.svg" alt="Q"> なぜエンジンオイルは必要なの？</div>
+              <div class="qa__item--open"></div>
+            </div>
+            <div class="qa__item-answer">
+              <p>金属表面の保護、金属同士の摩擦を軽減するためです。</p>
+            </div>
+          </li>
+          <li>
+            <div class="qa__item-question">
+              <div class="qa__item-question-p"><img src="images/q.svg" alt="Q"> エンジンオイルにはどのような働きがあるの？</div>
+              <div class="qa__item--open"></div>
+            </div>
+            <div class="qa__item-answer">
+              <p>潤滑作用・冷却作用・密封作用・防錆作用・清浄作用があります。</p>
+            </div>
+          </li>
+          <li>
+            <div class="qa__item-question">
+              <div class="qa__item-question-p"><img src="images/q.svg" alt="Q"> エンジンオイルはいつ交換したら良いの？</div>
+              <div class="qa__item--open"></div>
+            </div>
+            <div class="qa__item-answer">
+              <p>一般的には6ヶ月または5,000km毎が望ましいです。シビアコンディションではより短いサイクルを推奨します。</p>
+            </div>
+          </li>
+          <li>
+            <div class="qa__item-question">
+              <div class="qa__item-question-p"><img src="images/q.svg" alt="Q"> エンジンオイルって減るの？</div>
+              <div class="qa__item--open"></div>
+            </div>
+            <div class="qa__item-answer">
+              <p>走行状況等により徐々に減少します。量が減りすぎるとトラブルの原因になるため定期的な点検が必要です。</p>
+            </div>
+          </li>
+          <li>
+            <div class="qa__item-question">
+              <div class="qa__item-question-p"><img src="images/q.svg" alt="Q"> 粘度グレードってなに？</div>
+              <div class="qa__item--open"></div>
+            </div>
+            <div class="qa__item-answer">
+              <p>オイルの硬さをSAE粘度分類で表します。低温側に「W」を付けて区別します。</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+"""
+
+updated_html = current_html.replace(
+    '<section id="shop" class="shop">',
+    voice_section + "\n" + qa_section + '\n<section id="shop" class="shop">'
+)
+
+# 2) Replace map button with embedded Google Map for the store address
+address = "岩手県大船渡市猪川町久名畑4-30"
+embed_src = f"https://www.google.com/maps?q={quote(address)}&output=embed"
+updated_html = re.sub(
+    r'<div class="map"[^>]*>.*?</div>',
+    f'''<div class="map"><iframe src="{embed_src}" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>''',
+    updated_html,
+    flags=re.DOTALL
+)
+
+# Write file & zip
+index_path.write_text(updated_html, encoding="utf-8")
+
+zip_path = Path("/mnt/data/kobac-oofunato-final.zip")
+with ZipFile(zip_path, "w") as z:
+    z.write(index_path, arcname="index.html")
+
+{"file": str(index_path), "zip": str(zip_path)}
+
