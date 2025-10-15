@@ -313,6 +313,60 @@
   background-position: center bottom;              /* 中央配置・下端に表示 */
 }
   </style>
+  <style id="kobac-ofunato">
+/* --- メール導線は非表示（電話のみ） --- */
+.pc-mail-btn, .contact__cont.mail, .mail-btn { display:none !important; }
+
+/* --- 店名（白帯） UD新ゴ（Bold） --- */
+#campaign .store02title { text-align:center; }
+#campaign .store02title span{
+  display:block; padding:3px 10px; margin:0 5px;
+  background:#fff; color:#000; border-radius:3px;
+  font-size:28px; font-family:"UD新ゴNT B","UD Shin Go NT Bold","UD Shin Go","Noto Sans JP",sans-serif;
+}
+
+/* --- 作業受付時間 行（横並び&中央寄せ、行フォント指定） --- */
+@media (min-width:768px){
+  .campaign__time{
+    display:flex; align-items:center; justify-content:center; width:100%;
+    font-family:"ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif;
+    gap:28px;
+  }
+}
+
+/* 下線は1本だけ（疑似要素は殺して背景1本線に） */
+#campaign .campaign__time-text::before,
+#campaign .campaign__time-text::after{ content:none !important; display:none !important; }
+#campaign .campaign__time-text{
+  padding-bottom:12px; background-image:linear-gradient(#fff,#fff);
+  background-repeat:no-repeat; background-size:230px 2px; background-position:center bottom;
+  letter-spacing:.15em; font-weight:700;
+}
+
+/* --- 時間（9:00〜17:00） 見た目指定：左寄せ・幅固定・サイズ53px --- */
+#campaign .campaign__time-number{
+  margin:0 0 0 25px; width:625px; text-align:left;
+  font-size:53px; letter-spacing:.05em; line-height:1;
+  font-weight:900; white-space:nowrap; font-variant-numeric:tabular-nums;
+  font-family:"ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif;
+}
+
+/* スマホは自動調整（はみ出し防止） */
+@media (max-width:767px){
+  #campaign .campaign__time{ flex-direction:column; gap:10px; }
+  #campaign .campaign__time-number{
+    width:auto; margin:0; text-align:center;
+    font-size:40px; letter-spacing:.03em; white-space:normal;
+  }
+}
+
+/* --- QA：アコーディオン（初期クローズ＆既存＋アイコン優先） --- */
+.qa_content .qa-content .qa__item-answer{ display:none; }
+.qa_content .qa-content li.is-open .qa__item-answer{ display:block; }
+/* もし疑似要素の「＋/−」が出ていたら無効化（画像アイコンを使うため） */
+.qa_content .qa__item--open::after{ content:none !important; }
+.qa_content .qa__item-question{ cursor:pointer; }
+</style>
 </head>
 
 <body class="home blog">
@@ -567,5 +621,15 @@
       });
     });
   </script>
+  <script id="kobac-ofunato">
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.qa_content .qa__item-question').forEach(function(q){
+    q.addEventListener('click', function(){
+      var li = q.closest('li'); if(!li) return;
+      li.classList.toggle('is-open');
+    });
+  });
+});
+</script>
 </body>
 </html>
