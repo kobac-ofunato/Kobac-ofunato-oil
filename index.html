@@ -170,6 +170,53 @@
   #campaign .campaign__time{ flex-direction: column; gap: 8px !important; }
   #campaign .campaign__time-number{ font-size: clamp(34px, 12vw, 64px) !important; }
 }
+    /* === さらに小さく＆1行で収める（上書き） === */
+
+/* 横幅を抑えて中央に */
+#campaign .inner{ max-width: 960px !important; padding: 20px 12px !important; }
+
+/* 店名の白帯を小さめに */
+#campaign .store02title span{
+  font-size: clamp(16px, 1.4vw, 22px) !important;
+  padding: 6px 14px !important;
+}
+
+/* ラベルと時刻の間隔をさらに詰める */
+#campaign .campaign__time{
+  gap: clamp(8px, 2.6vw, 22px) !important;
+  flex-wrap: nowrap !important;                  /* 折り返さない */
+  justify-content: center !important;
+}
+
+/* ラベルも少し小さめ */
+#campaign .campaign__time-text{
+  font-size: clamp(12px, 1.2vw, 16px) !important;
+  letter-spacing: .14em !important;
+}
+#campaign .campaign__time-text::after{
+  width: clamp(96px, 12vw, 180px) !important;
+}
+
+/* ★時刻：さらに縮小＆1行固定 */
+#campaign .campaign__time-number{
+  font-size: clamp(30px, 4.6vw, 56px) !important; /* ← 上限56px */
+  letter-spacing: .04em !important;
+  line-height: 1 !important;
+  font-weight: 900 !important;
+  font-variant-numeric: tabular-nums !important;
+  margin: 0 !important;
+  white-space: nowrap !important;                 /* ← 1行に固定 */
+  text-align: center !important;
+}
+
+/* 超ワイド画面では上限さらに抑制（任意） */
+@media (min-width: 1400px){
+  #campaign .campaign__time-number{ font-size: 52px !important; }
+}
+@media (max-width: 767px){
+  #campaign .campaign__time{ flex-direction: column; gap: 8px !important; }
+  #campaign .campaign__time-number{ font-size: clamp(28px, 10.5vw, 48px) !important; }
+}
   </style>
 </head>
 
