@@ -217,6 +217,84 @@
   #campaign .campaign__time{ flex-direction: column; gap: 8px !important; }
   #campaign .campaign__time-number{ font-size: clamp(28px, 10.5vw, 48px) !important; }
 }
+    /* =======================
+   店名（白帯）
+   ======================= */
+#campaign .store02title { text-align: center !important; }
+#campaign .store02title span{
+  display: block !important;
+  padding: 3px 10px !important;
+  margin: 0 5px !important;
+  background-color: #fff !important;
+  color: #000 !important;
+  font-size: 28px !important;
+  /* UD新ゴ指定（TypeSquare前提）。なければ近い太字にフォールバック */
+  font-family: "UD新ゴNT B","UD Shin Go NT Bold","UD Shin Go","Noto Sans JP",sans-serif !important;
+  border-radius: 3px !important;
+}
+
+/* =======================
+   作業受付時間（ラベル＋時間）行
+   ======================= */
+@media screen and (min-width: 768px){
+  .campaign__time{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    /* 行全体の基本フォントに ゴシックMB101 H を指定 */
+    font-family: "ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif !important;
+    gap: 28px !important; /* ラベルと時間の間隔はお好みで */
+  }
+}
+
+/* ラベル（作業受付時間）：下線は1本だけに */
+#campaign .campaign__time-text{
+  position: relative !important;
+  font-weight: 700 !important;
+  letter-spacing: .15em !important;
+}
+#campaign .campaign__time-text::before{ display:none !important; } /* テーマ側で2本出している場合を無効化 */
+#campaign .campaign__time-text::after{
+  content:"" !important;
+  display:block !important;
+  width: 230px !important;       /* 長さはお好みで */
+  height: 2px !important;
+  background: rgba(255,255,255,.9) !important;
+  margin: 12px 0 0 !important;
+}
+
+/* 時刻（11：00〜17：30 など） */
+#campaign .campaign__time-number{
+  margin: 0 0 0 25px !important; /* ← ご指定 */
+  font-size: 53px !important;    /* ← ご指定（PC） */
+  letter-spacing: .05em !important; /* ← ご指定 */
+  width: 625px !important;       /* ← ご指定（PC） */
+  text-align: left !important;   /* ← ご指定 */
+  line-height: 1 !important;
+  font-weight: 900 !important;
+  font-family: "ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif !important;
+  font-variant-numeric: tabular-nums !important; /* 数字幅を揃えてズレを軽減 */
+  white-space: nowrap !important; /* 改行を防止 */
+}
+
+/* -----------------------
+   スマホ時の最適化（任意）
+   ----------------------- */
+@media (max-width: 767px){
+  #campaign .campaign__time{
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  #campaign .campaign__time-number{
+    width: auto !important;
+    margin: 0 !important;
+    text-align: center !important;
+    font-size: 40px !important; /* スマホはやや小さめに */
+    letter-spacing: .03em !important;
+    white-space: normal !important; /* スマホでは改行許可でもOK */
+  }
+}
   </style>
 </head>
 
