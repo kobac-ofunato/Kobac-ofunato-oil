@@ -295,6 +295,23 @@
     white-space: normal !important; /* スマホでは改行許可でもOK */
   }
 }
+    /* 下線を1本に統一：既存の擬似要素は全消し */
+#campaign .campaign__time-text::before,
+#campaign .campaign__time-text::after{
+  content: none !important;
+  display: none !important;
+}
+
+/* 擬似要素ではなく背景で1本線を描く */
+#campaign .campaign__time-text{
+  border: 0 !important;
+  background-image: none !important;
+  padding-bottom: 12px !important;                 /* 文字下に余白 */
+  background-image: linear-gradient(#fff, #fff);   /* 白の線 */
+  background-repeat: no-repeat;
+  background-size: 230px 2px;                      /* 線の長さ/太さ ←お好みで調整 */
+  background-position: center bottom;              /* 中央配置・下端に表示 */
+}
   </style>
 </head>
 
