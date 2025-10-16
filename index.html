@@ -94,7 +94,6 @@
 }
 .qa_content .qa__item-question img,
 .qa_content .qa__item-question .qa__item--open{ pointer-events:none; }
-  </style>
 
   <!-- ====== 上書きCSSその2：固定TEL（SPのみ） ====== -->
   <style id="kobac-sticky-tel">
@@ -123,9 +122,65 @@ body .sticky-tel{
 @media (min-width: 768px){
   body .sticky-tel{ display: none !important; }
 }
-  </style>
+    <style id="kobac-hotfix-mobile">
+/* ====== スマホ下部の“赤い余白”対策 ====== */
+/* bodyの下パディングをゼロに戻す（余白の原因を解消） */
+@media (max-width: 767px){
+  body { padding-bottom: 0 !important; }
+}
 
-</style>
+/* 固定TELバーは安全域に沿わせ、はみ出しや余白を防止 */
+body .sticky-tel{
+  bottom: env(safe-area-inset-bottom, 0) !important;
+  margin: 0 !important;
+  border: 0 !important;
+}
+
+/* 念のため、もし固定じゃない“複製”がフッター内に出たら隠す */
+footer .sticky-tel, #footer .sticky-tel { display:none !important; }
+
+/* ====== スマホの時間表記を元サイト風に整える ====== */
+@media (max-width: 767px){
+  /* 全体の余白を少し締める */
+  #campaign .inner{
+    padding: 20px 12px !important;
+  }
+
+  /* 「作業受付時間」→ 時刻 を縦積み・中央寄せ */
+  #campaign .campaign__time{
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+  }
+
+  /* ラベルの下線は短めで中央に1本 */
+  #campaign .campaign__time-text{
+    font-size: 14px !important;
+    letter-spacing: .15em !important;
+    padding-bottom: 10px !important;
+    background-image: linear-gradient(#fff,#fff) !important;
+    background-repeat: no-repeat !important;
+    background-size: 180px 2px !important;
+    background-position: center bottom !important;
+  }
+
+  /* 時刻は等幅寄り・折り返しなし・中央揃え */
+  #campaign .campaign__time-number{
+    width: auto !important;
+    margin: 0 !important;
+    text-align: center !important;
+    font-size: 34px !important;
+    line-height: 1 !important;
+    letter-spacing: .05em !important;
+    white-space: nowrap !important;
+    font-weight: 900 !important;
+    font-variant-numeric: tabular-nums !important;
+    font-family: "ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif !important;
+  }
+}
+  </style>
 </head>
 
 <body class="home blog">
