@@ -27,110 +27,82 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="//typesquare.com/3/tsst/script/ja/typesquare.js?5bab21741898427c92a66ad2ac1e024a" charset="utf-8"></script>
 
-<style id="kobac-final">
-:root{ --kobac-red:#FF0000; }
+<style id="kobac-reset">
+/* テーマの赤に合わせる */
+:root{ --kobac-red:#E60012; }
 
-/* 電話以外の導線は非表示 */
+/* メール導線は非表示（電話誘導のみ） */
 .pc-mail-btn, .contact__cont.mail, .mail-btn { display:none !important; }
 
-/* キャンペーン帯 */
+/* キャンペーン帯の背景色だけ指定（他はテーマに任せる） */
 #campaign{ background:var(--kobac-red); color:#fff; }
 
-/* 店名（白帯） */
-#campaign .store02title{ text-align:center; margin: 0 0 12px; }
+/* 店名（白帯）— 元サイトと同じ太さ・書体系 */
+#campaign .store02title{ text-align:center; margin:0 0 10px; }
 #campaign .store02title span{
-  display:block; padding:3px 10px; margin:0 5px;
-  background:#fff; color:#000; border-radius:3px;
-  font-size:28px;
+  display:block; padding:3px 10px; margin:0 5px; background:#fff; color:#000;
+  border-radius:3px; font-size:28px;
   font-family:"UD新ゴNT B","UD Shin Go NT Bold","UD Shin Go","Noto Sans JP",sans-serif;
 }
 
-/* 作業受付時間 行（PCはそのまま横並び） */
+/* 作業受付時間の並びは“横一列”を強制（PCはテーマのままでOK） */
 #campaign .campaign__time{
-  display:flex; align-items:center; justify-content:center; width:100%;
-  gap: 16px;
+  display:flex; align-items:center; justify-content:center; gap:16px;
   font-family:"ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif;
 }
 
-/* ラベルの下線は1本 */
+/* ラベルの下線は1本（テーマ側の疑似要素を無効化し、1本だけ描く） */
 #campaign .campaign__time-text::before,
 #campaign .campaign__time-text::after{ content:none !important; display:none !important; }
 #campaign .campaign__time-text{
-  letter-spacing:.15em; font-weight:700;
+  font-weight:700; letter-spacing:.15em; white-space:nowrap;
   padding-bottom:10px;
   background-image:linear-gradient(#fff,#fff);
   background-repeat:no-repeat; background-size:180px 2px; background-position:center bottom;
-  white-space:nowrap;
 }
 
-/* 時間（PCは指定どおり） */
+/* 時間右側（PCはテーマのサイズでOK、スマホだけ縮める） */
 #campaign .campaign__time-number{
-  margin:0 0 0 12px; width:auto; text-align:left;
-  font-size:53px; letter-spacing:.05em; line-height:1;
-  font-weight:900; white-space:nowrap; font-variant-numeric:tabular-nums;
-  font-family:"ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif;
+  margin:0 0 0 12px; line-height:1; font-weight:900;
+  font-variant-numeric:tabular-nums; white-space:nowrap; text-align:left;
 }
 
-/* ===== スマホ最適化（はみ出し防止＆重なり回避） ===== */
+/* ===== スマホだけ微調整（はみ出し・重なり防止） ===== */
 @media (max-width:767px){
-  /* 白帯と被らないよう少し下げる＋横並び維持 */
+  #campaign .inner{ padding:24px 14px; }
+  #campaign .store02title{ margin-bottom:8px; }
   #campaign .campaign__time{
-    margin-top: 6px;
-    gap: 10px;
-    flex-wrap: nowrap;
+    flex-direction:row; flex-wrap:nowrap; align-items:baseline; justify-content:center;
+    gap:8px; margin-top:6px;     /* ← 白帯と重ならないよう少し下げる */
   }
-  /* ラベルは少し小さく＆下線短め */
   #campaign .campaign__time-text{
-    font-size: 13px;
-    background-size:140px 2px;
+    font-size:12px; background-size:120px 2px;
   }
-  /* 時間は縮小して収める（はみ出し防止） */
   #campaign .campaign__time-number{
-    font-size: clamp(26px, 7.2vw, 36px);  /* ★スマホだけ小さめ */
-    letter-spacing:.04em;
-    max-width: 78vw;                      /* 横幅ガード */
-    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    font-size:clamp(26px, 7vw, 36px);  /* ← スマホのみ自動で縮小 */
+    margin-left:8px; max-width:75vw; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
   }
 }
 
-/* QAアコーディオン：CSSは最小限でOK */
+/* QA はテーマの見た目を使い、回答だけ開閉 */
 .qa_content .qa-content .qa__item-answer{ display:none; }
 .qa_content .qa-content li.is-open .qa__item-answer{ display:block; }
-/* 既存アイコン画像を使うため、疑似要素の＋/−は消す */
+/* 既存の＋画像を使うので疑似要素の＋/−は消す */
 .qa_content .qa__item--open::after{ content:none !important; }
-.qa_content .qa__item-question{ cursor:pointer; position:relative; z-index:1; -webkit-tap-highlight-color:transparent; touch-action:manipulation; }
-.qa_content .qa__item-question img,
-.qa_content .qa__item-question .qa__item--open{ pointer-events:none; }
-</style>
 
-<style id="kobac-sticky-tel">
-/* 固定TEL（SPのみ表示） */
+/* スマホ固定TEL（1つだけ表示） */
 a.sticky-tel{
-  position: fixed !important;
-  left: 0; right: 0; bottom: env(safe-area-inset-bottom, 0);
-  display: block;
-  background: #FF0000; color: #fff; text-decoration: none; text-align: center;
-  padding: 14px 0;
-  font-weight: 800;
-  z-index: 9999;
-  line-height: 1.2;
-  box-shadow: 0 -3px 12px rgba(0,0,0,.15);
-  -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+  position:fixed; left:0; right:0; bottom:env(safe-area-inset-bottom,0);
+  display:block; background:var(--kobac-red); color:#fff; text-align:center; text-decoration:none;
+  padding:14px 0; font-weight:800; z-index:9999; line-height:1.2;
+  box-shadow:0 -3px 12px rgba(0,0,0,.15);
 }
-/* コンテンツが隠れないよう下余白（赤い帯が“残る”のを防止） */
-@media (max-width:767px){
-  body{ padding-bottom: 62px !important; }
-}
-/* PCでは非表示 */
-@media (min-width:768px){
-  a.sticky-tel{ display: none !important; }
-}
-/* 念のため：もし複数 .sticky-tel があっても最後の1つだけ表示 */
-a.sticky-tel:not(:last-of-type){ display:none !important; }
-/* フッター内に誤って置かれた複製は非表示 */
-footer .sticky-tel, #footer .sticky-tel { display:none !important; }
+@media (max-width:767px){ body{ padding-bottom:62px !important; } } /* 隠れ防止 */
+@media (min-width:768px){ a.sticky-tel{ display:none !important; } } /* PCは非表示 */
+a.sticky-tel:not(:last-of-type){ display:none !important; }          /* 複製があっても最後だけ */
+footer .sticky-tel, #footer .sticky-tel { display:none !important; }  /* フッター内の誤配置は隠す */
 
-/* 背景色の“赤”が残って見えるのを確実に防ぐ */
+/* まれに“赤帯が残る”見え方対策 */
 html, body { background:#fff !important; }
 </style>
 </head>
