@@ -45,10 +45,12 @@
   font-family:"UD新ゴNT B","UD Shin Go NT Bold","UD Shin Go","Noto Sans JP",sans-serif;
 }
 
-/* 作業受付時間の並びは“横一列”を強制（PCはテーマのままでOK） */
-#campaign .campaign__time{
-  display:flex; align-items:center; justify-content:center; gap:16px;
-  font-family:"ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif;
+/* PCは横並び（元サイト準拠） */
+@media (min-width:768px){
+  #campaign .campaign__time{
+    display:flex; align-items:center; justify-content:center; gap:16px;
+    font-family:"ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif;
+  }
 }
 
 /* ラベルの下線は1本（テーマ側の疑似要素を無効化し、1本だけ描く） */
@@ -61,26 +63,46 @@
   background-repeat:no-repeat; background-size:180px 2px; background-position:center bottom;
 }
 
-/* 時間右側（PCはテーマのサイズでOK、スマホだけ縮める） */
+/* 時間右側（PCはテーマのサイズでOK） */
 #campaign .campaign__time-number{
   margin:0 0 0 12px; line-height:1; font-weight:900;
   font-variant-numeric:tabular-nums; white-space:nowrap; text-align:left;
+  font-family:"ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif;
 }
 
-/* ===== スマホだけ微調整（はみ出し・重なり防止） ===== */
+/* ===== スマホだけ“3行”に固定（店名 → 作業受付時間 → 時間） ===== */
 @media (max-width:767px){
   #campaign .inner{ padding:24px 14px; }
-  #campaign .store02title{ margin-bottom:8px; }
+  #campaign .store02title{ margin-bottom:10px; }
+
+  /* ← ここがポイント：3行にするためブロック化＆中央寄せ */
   #campaign .campaign__time{
-    flex-direction:row; flex-wrap:nowrap; align-items:baseline; justify-content:center;
-    gap:8px; margin-top:6px;     /* ← 白帯と重ならないよう少し下げる */
+    display:block !important;
+    text-align:center !important;
+    margin-top:8px !important;            /* 白帯と重ならないよう少し下げる */
   }
+
+  /* 2行目：ラベル（下線は短めで1本） */
   #campaign .campaign__time-text{
-    font-size:12px; background-size:120px 2px;
+    display:block !important;
+    font-size:12px !important;
+    letter-spacing:.15em !important;
+    padding-bottom:10px !important;
+    margin:0 auto 8px !important;
+    background-size:140px 2px !important;
   }
+
+  /* 3行目：時間（“サイズはほぼそのまま”で、はみ出さない範囲に自動縮小） */
   #campaign .campaign__time-number{
-    font-size:clamp(26px, 7vw, 36px);  /* ← スマホのみ自動で縮小 */
-    margin-left:8px; max-width:75vw; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+    display:block !important;
+    margin:0 auto !important;
+    text-align:center !important;
+    line-height:1 !important;
+    font-weight:900 !important;
+    white-space:nowrap !important;
+    font-variant-numeric:tabular-nums !important;
+    font-size:clamp(28px, 7.5vw, 36px) !important;  /* はみ出し防止のみ */
+    max-width:92vw !important; overflow:hidden; text-overflow:ellipsis;
   }
 }
 
@@ -90,19 +112,25 @@
 /* 既存の＋画像を使うので疑似要素の＋/−は消す */
 .qa_content .qa__item--open::after{ content:none !important; }
 
-/* スマホ固定TEL（1つだけ表示） */
+/* ===== スマホ固定TEL（重複対策＆“赤い帯”消し） ===== */
 a.sticky-tel{
   position:fixed; left:0; right:0; bottom:env(safe-area-inset-bottom,0);
   display:block; background:var(--kobac-red); color:#fff; text-align:center; text-decoration:none;
   padding:14px 0; font-weight:800; z-index:9999; line-height:1.2;
   box-shadow:0 -3px 12px rgba(0,0,0,.15);
 }
-@media (max-width:767px){ body{ padding-bottom:62px !important; } } /* 隠れ防止 */
-@media (min-width:768px){ a.sticky-tel{ display:none !important; } } /* PCは非表示 */
-a.sticky-tel:not(:last-of-type){ display:none !important; }          /* 複製があっても最後だけ */
-footer .sticky-tel, #footer .sticky-tel { display:none !important; }  /* フッター内の誤配置は隠す */
+/* モバイルはTELバー分だけ下余白を付ける（本文が隠れないように） */
+@media (max-width:767px){ body{ padding-bottom:62px !important; } }
+/* PCは非表示＆余白ゼロに戻す */
+@media (min-width:768px){
+  a.sticky-tel{ display:none !important; }
+  body{ padding-bottom:0 !important; }
+}
+/* ダブりを強制的に抑止（最後の1個だけ表示） */
+a.sticky-tel:not(:last-of-type){ display:none !important; }
+footer .sticky-tel, #footer .sticky-tel { display:none !important; }
 
-/* まれに“赤帯が残る”見え方対策 */
+/* まれに“赤帯が残る”見え方対策（背景を白に固定） */
 html, body { background:#fff !important; }
 </style>
 </head>
