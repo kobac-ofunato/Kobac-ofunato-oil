@@ -14,172 +14,106 @@
   <meta property="og:site_name" content="車検のコバック大船渡店" />
   <meta property="og:description" content="大船渡店限定・新規のお客様向けエンジンオイル交換500円！作業受付時間 9:00〜17:00。お電話でお気軽にどうぞ。0120-589-196" />
 
-  <!-- ファビコン（任意差し替え可） -->
+  <!-- ファビコン -->
   <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon-precomposed.png" />
   <link type="image/png" rel="shortcut icon" href="images/favicon.png" />
   <link rel="icon" href="/img/logo_boy.png"/>
 
-  <!-- 参照サイトのCSSを流用（必要に応じてローカルに差し替え推奨） -->
+  <!-- 参照テーマのCSS -->
   <link rel="stylesheet" href="https://sasebo.kobac-campaign-lp.com/oil/wp-content/themes/oishiimono/css/style.min.css">
   <link rel="stylesheet" href="https://sasebo.kobac-campaign-lp.com/oil/wp-content/themes/oishiimono/css/add.css">
 
-  <!-- フォント/JS（必要最小限に絞り、計測タグは削除） -->
+  <!-- フォント/JS（必要最小限） -->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="//typesquare.com/3/tsst/script/ja/typesquare.js?5bab21741898427c92a66ad2ac1e024a" charset="utf-8"></script>
 
-  <!-- ====== 上書きCSSその1 ====== -->
-  <style id="kobac-final">
-:root{ --kobac-red:#FF0000; }
+  <!-- ====== 上書きCSS（1枚に統合） ====== -->
+  <style id="kobac-unified">
+  :root{ --kobac-red:#FF0000; --tel-h:56px; }
 
-/* 電話のみ導線（メール系は非表示） */
-.pc-mail-btn, .contact__cont.mail, .mail-btn { display:none !important; }
+  /* 電話のみ導線（メール系は非表示） */
+  .pc-mail-btn, .contact__cont.mail, .mail-btn { display:none !important; }
 
-/* キャンペーン帯の背景色（赤） */
-#campaign{ background:var(--kobac-red); color:#fff; }
+  /* キャンペーン帯 背景 */
+  #campaign{ background:var(--kobac-red); color:#fff; }
 
-/* 店名（白帯）— UD新ゴ Bold 指定 */
-#campaign .store02title{ text-align:center; }
-#campaign .store02title span{
-  display:block; padding:3px 10px; margin:0 5px;
-  background:#fff; color:#000; border-radius:3px;
-  font-size:28px;
-  font-family:"UD新ゴNT B","UD Shin Go NT Bold","UD Shin Go","Noto Sans JP",sans-serif;
-}
+  /* 店名（白帯） */
+  #campaign .store02title{ text-align:center; position:relative; z-index:1; margin:0 0 8px; }
+  #campaign .store02title span{
+    display:inline-block; padding:3px 10px; margin:0 5px;
+    background:#fff; color:#000; border-radius:3px;
+    font-size:28px;
+    font-family:"UD新ゴNT B","UD Shin Go NT Bold","UD Shin Go","Noto Sans JP",sans-serif;
+  }
 
-/* 作業受付時間 行：横並び＆中央寄せ（行フォント＝ゴシックMB101 H） */
-@media (min-width:768px){
-  .campaign__time{
-    display:flex; align-items:center; justify-content:center; width:100%;
-    gap:28px;
+  /* 作業受付時間（行） */
+  #campaign .campaign__time{ position:relative; z-index:2; margin-top:8px; }
+  @media (min-width:768px){
+    #campaign .campaign__time{
+      display:flex; align-items:center; justify-content:center; gap:28px; width:100%;
+      font-family:"ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif;
+    }
+  }
+
+  /* ラベルの下線は1本だけ（背景で描画） */
+  #campaign .campaign__time-text::before,
+  #campaign .campaign__time-text::after{ content:none !important; display:none !important; }
+  #campaign .campaign__time-text{
+    letter-spacing:.15em; font-weight:700; padding-bottom:12px;
+    background-image:linear-gradient(#fff,#fff);
+    background-repeat:no-repeat; background-size:230px 2px; background-position:center bottom;
+  }
+
+  /* 時刻（PCの指定どおり） */
+  #campaign .campaign__time-number{
+    margin:0 0 0 25px; width:625px; text-align:left;
+    font-size:53px; letter-spacing:.05em; line-height:1;
+    font-weight:900; white-space:nowrap; font-variant-numeric:tabular-nums;
     font-family:"ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif;
   }
-}
 
-/* ラベルの下線は“1本のみ”に統一（疑似要素は殺して背景で描画） */
-#campaign .campaign__time-text::before,
-#campaign .campaign__time-text::after{ content:none !important; display:none !important; }
-#campaign .campaign__time-text{
-  letter-spacing:.15em; font-weight:700;
-  padding-bottom:12px; border:0 !important; background-image:none !important;
-  background-image:linear-gradient(#fff,#fff);
-  background-repeat:no-repeat; background-size:230px 2px; background-position:center bottom;
-}
-
-/* 時刻（左寄せ・幅固定・サイズ53px） */
-#campaign .campaign__time-number{
-  margin:0 0 0 25px; width:625px; text-align:left;
-  font-size:53px; letter-spacing:.05em; line-height:1;
-  font-weight:900; white-space:nowrap; font-variant-numeric:tabular-nums;
-  font-family:"ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif;
-}
-
-/* スマホ最適化（はみ出し防止） */
-@media (max-width:767px){
-  #campaign .campaign__time{ flex-direction:column; gap:10px; }
-  #campaign .campaign__time-number{
-    width:auto; margin:0; text-align:center;
-    font-size:40px; letter-spacing:.03em; white-space:normal;
-  }
-}
-
-/* QA：アコーディオン（初期クローズ、画像＋記号は既存の画像のみ使用） */
-.qa_content .qa-content .qa__item-answer{ display:none; }
-.qa_content .qa-content li.is-open .qa__item-answer{ display:block; }
-/* 擬似要素の＋/−は出さない（既存のアイコン画像を使う） */
-.qa_content .qa__item--open::after{ content:none !important; }
-/* スマホでのタップ取りこぼし防止 */
-.qa_content .qa__item-question{
-  cursor:pointer; position:relative; z-index:1;
-  -webkit-tap-highlight-color:transparent; touch-action:manipulation;
-}
-.qa_content .qa__item-question img,
-.qa_content .qa__item-question .qa__item--open{ pointer-events:none; }
-
-  <!-- ====== 上書きCSSその2：固定TEL（SPのみ） ====== -->
-  <style id="kobac-sticky-tel">
-/* —— 固定TEL（SPのみ表示）—— */
-body .sticky-tel{
-  position: fixed !important;
-  left: 0; right: 0; bottom: 0;
-  display: block;
-  background: #FF0000;
-  color: #fff; text-decoration: none; text-align: center;
-  padding: 14px 0;
-  font-weight: 800;
-  z-index: 9999;
-  line-height: 1.2;
-  box-shadow: 0 -3px 12px rgba(0,0,0,.15);
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-}
-
-/* Stickyで隠れやすい下端を避ける */
-@media (max-width:767px){
-  body{ padding-bottom: 64px; }
-}
-
-/* PCでは非表示 */
-@media (min-width: 768px){
-  body .sticky-tel{ display: none !important; }
-}
-    <style id="kobac-hotfix-mobile">
-/* ====== スマホ下部の“赤い余白”対策 ====== */
-/* bodyの下パディングをゼロに戻す（余白の原因を解消） */
-@media (max-width: 767px){
-  body { padding-bottom: 0 !important; }
-}
-
-/* 固定TELバーは安全域に沿わせ、はみ出しや余白を防止 */
-body .sticky-tel{
-  bottom: env(safe-area-inset-bottom, 0) !important;
-  margin: 0 !important;
-  border: 0 !important;
-}
-
-/* 念のため、もし固定じゃない“複製”がフッター内に出たら隠す */
-footer .sticky-tel, #footer .sticky-tel { display:none !important; }
-
-/* ====== スマホの時間表記を元サイト風に整える ====== */
-@media (max-width: 767px){
-  /* 全体の余白を少し締める */
-  #campaign .inner{
-    padding: 20px 12px !important;
+  /* スマホ最適化（横1列キープ・はみ出し防止） */
+  @media (max-width:767px){
+    #campaign .inner{ padding:20px 12px !important; }
+    #campaign .campaign__time{
+      display:flex !important; flex-direction:row !important;
+      align-items:center !important; justify-content:center !important; gap:12px !important;
+    }
+    #campaign .campaign__time-text{
+      font-size:13px !important; background-size:160px 2px !important;
+    }
+    #campaign .campaign__time-number{
+      width:auto !important; margin:0 !important; text-align:left !important;
+      font-size:34px !important; letter-spacing:.04em !important; white-space:nowrap !important;
+    }
   }
 
-  /* 「作業受付時間」→ 時刻 を縦積み・中央寄せ */
-  #campaign .campaign__time{
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 10px !important;
+  /* QA：アコーディオン（初期クローズ、既存Q画像のみ） */
+  .qa_content .qa-content .qa__item-answer{ display:none; }
+  .qa_content .qa-content li.is-open .qa__item-answer{ display:block; }
+  .qa_content .qa__item--open::after{ content:none !important; }
+  .qa_content .qa__item-question{
+    cursor:pointer; position:relative; z-index:1;
+    -webkit-tap-highlight-color:transparent; touch-action:manipulation;
   }
+  .qa_content .qa__item-question img,
+  .qa_content .qa__item-question .qa__item--open{ pointer-events:none; }
 
-  /* ラベルの下線は短めで中央に1本 */
-  #campaign .campaign__time-text{
-    font-size: 14px !important;
-    letter-spacing: .15em !important;
-    padding-bottom: 10px !important;
-    background-image: linear-gradient(#fff,#fff) !important;
-    background-repeat: no-repeat !important;
-    background-size: 180px 2px !important;
-    background-position: center bottom !important;
+  /* スマホ固定TEL（必ず固定表示） */
+  @media (max-width:767px){
+    body{ padding-bottom: var(--tel-h); } /* 隠れ防止 */
+    .sticky-tel{
+      position:fixed !important; left:0; right:0; bottom:env(safe-area-inset-bottom,0) !important;
+      height:var(--tel-h) !important;
+      display:flex !important; align-items:center; justify-content:center;
+      background:#FF0000 !important; color:#fff !important; text-decoration:none !important;
+      font-weight:800 !important; z-index:9999 !important; line-height:1.2 !important;
+      box-shadow:0 -3px 12px rgba(0,0,0,.15);
+      -webkit-tap-highlight-color:transparent; touch-action:manipulation;
+    }
+    footer .sticky-tel, #footer .sticky-tel{ display:none !important; } /* フッター内の複製を無効化 */
   }
-
-  /* 時刻は等幅寄り・折り返しなし・中央揃え */
-  #campaign .campaign__time-number{
-    width: auto !important;
-    margin: 0 !important;
-    text-align: center !important;
-    font-size: 34px !important;
-    line-height: 1 !important;
-    letter-spacing: .05em !important;
-    white-space: nowrap !important;
-    font-weight: 900 !important;
-    font-variant-numeric: tabular-nums !important;
-    font-family: "ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif !important;
-  }
-}
+  @media (min-width:768px){ .sticky-tel{ display:none !important; } } /* PCは非表示 */
   </style>
 </head>
 
@@ -423,50 +357,48 @@ footer .sticky-tel, #footer .sticky-tel { display:none !important; }
   <!-- スマホ下部固定TELボタン -->
   <a href="tel:0120-589-196" class="sticky-tel">📞 今すぐ電話</a>
 
-  <!-- QAアコーディオン用JS（jQuery不要） -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      document.querySelectorAll('.qa_content .qa__item-question').forEach(function(q){
-        q.addEventListener('click', function(){
-          var li = q.closest('li');
-          if (!li) return;
-          li.classList.toggle('is-open');
-        });
-      });
-    });
-  </script>
-  <script id="kobac-ofunato">
-document.addEventListener('DOMContentLoaded', function(){
-  document.querySelectorAll('.qa_content .qa__item-question').forEach(function(q){
-    q.addEventListener('click', function(){
-      var li = q.closest('li'); if(!li) return;
-      li.classList.toggle('is-open');
-    });
-  });
-});
-</script>
-  <script id="kobac-final-qa">
+ <!-- QAアコーディオン：1本に統合 -->
+<script id="qa-accordion">
 (function () {
-  function toggle(li){ if(li) li.classList.toggle('is-open'); }
+  function toggle(li) {
+    if (!li) return;
+    li.classList.toggle('is-open');
+    // ARIA（任意）：開閉状態を反映
+    const btn = li.querySelector('.qa__item-question');
+    if (btn) btn.setAttribute('aria-expanded', li.classList.contains('is-open') ? 'true' : 'false');
+  }
 
-  function onPress(e){
+  function onPress(e) {
     const q = e.target.closest('.qa_content .qa__item-question');
-    if(!q) return;
-    e.preventDefault();           // 画像等の既定動作を抑止（モバイル安定）
+    if (!q) return;
+    e.preventDefault(); // 画像のドラッグなど既定動作を抑止（スマホ安定化）
     toggle(q.closest('li'));
   }
 
-  document.addEventListener('click', onPress, { passive:false });
-  document.addEventListener('touchstart', onPress, { passive:false });
+  // クリック/タッチは「イベント委譲」で1本だけ登録
+  document.addEventListener('click', onPress, { passive: false });
+  document.addEventListener('touchstart', onPress, { passive: false });
 
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Enter' || e.key === ' '){
-      const q = e.target.closest('.qa_content .qa__item-question');
-      if(q){ e.preventDefault(); toggle(q.closest('li')); }
-    }
+  // キーボード対応（Enter/Space）
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const q = e.target.closest('.qa_content .qa__item-question');
+    if (!q) return;
+    e.preventDefault();
+    toggle(q.closest('li'));
+  });
+
+  // 初期ARIA（任意）
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.qa_content .qa__item-question').forEach(function (q) {
+      q.setAttribute('role', 'button');
+      q.setAttribute('tabindex', '0');
+      q.setAttribute('aria-expanded', 'false');
+    });
   });
 })();
 </script>
+
   <a href="tel:0120-589-196" class="sticky-tel" aria-label="今すぐ電話（0120-589-196）">
   📞 今すぐ電話
 </a>
