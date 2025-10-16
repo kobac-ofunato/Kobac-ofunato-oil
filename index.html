@@ -93,6 +93,25 @@
 }
 .qa_content .qa__item-question img,
 .qa_content .qa__item-question .qa__item--open{ pointer-events:none; }
+  <style id="kobac-sticky-tel">
+/* —— 固定TEL（SPのみ表示）—— */
+body .sticky-tel{
+  position: fixed !important;   /* ← 他CSSに負けないように */
+  left: 0; right: 0; bottom: 0;
+  display: block;
+  background: #FF0000;
+  color: #fff; text-decoration: none; text-align: center;
+  padding: 14px 0;
+  font-weight: 800;
+  z-index: 9999;                /* ← フッターより前面に */
+  line-height: 1.2;
+  box-shadow: 0 -3px 12px rgba(0,0,0,.15);
+  -webkit-tap-highlight-color: transparent;       /* モバイルのタップ感度 */
+  touch-action: manipulation;
+}
+@media (min-width: 768px){
+  body .sticky-tel{ display: none !important; }   /* ← PCは非表示を強制 */
+}
 </style>
 </head>
 
@@ -380,5 +399,8 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 })();
 </script>
+  <a href="tel:0120-589-196" class="sticky-tel" aria-label="今すぐ電話（0120-589-196）">
+  📞 今すぐ電話
+</a>
 </body>
 </html>
