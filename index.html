@@ -27,134 +27,68 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="//typesquare.com/3/tsst/script/ja/typesquare.js?5bab21741898427c92a66ad2ac1e024a" charset="utf-8"></script>
 
-<style id="kobac-reset">
-/* テーマの赤に合わせる */
-:root{ --kobac-red:#FF0012; }
+<style id="kobac-sp-fixes">
+/* ========== スマホだけ：店名 → 作業受付時間 → 時間（3行） & 下線は長い1本だけ ========== */
+@media (max-width: 767px){
+  #campaign .inner{ padding:20px 12px !important; }
+  #campaign .store02title{ margin-bottom:10px !important; }
 
-/* メール導線は非表示（電話誘導のみ） */
-.pc-mail-btn, .contact__cont.mail, .mail-btn { display:none !important; }
-
-/* キャンペーン帯の背景色だけ指定（他はテーマに任せる） */
-#campaign{ background:var(--kobac-red); color:#fff; }
-
-/* 店名（白帯）— 元サイトと同じ太さ・書体系 */
-#campaign .store02title{ text-align:center; margin:0 0 10px; }
-#campaign .store02title span{
-  display:block; padding:3px 10px; margin:0 5px; background:#fff; color:#000;
-  border-radius:3px; font-size:28px;
-  font-family:"UD新ゴNT B","UD Shin Go NT Bold","UD Shin Go","Noto Sans JP",sans-serif;
-}
-
-/* PCは横並び（元サイト準拠） */
-@media (min-width:768px){
+  /* 見出し行を縦積み・中央寄せ */
   #campaign .campaign__time{
-    display:flex; align-items:center; justify-content:center; gap:16px;
-    font-family:"ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif;
-  }
-}
-
-/* ラベルの下線は1本（テーマ側の疑似要素を無効化し、1本だけ描く） */
-#campaign .campaign__time-text::before,
-#campaign .campaign__time-text::after{ content:none !important; display:none !important; }
-#campaign .campaign__time-text{
-  font-weight:700; letter-spacing:.15em; white-space:nowrap;
-  padding-bottom:10px;
-  background-image:linear-gradient(#fff,#fff);
-  background-repeat:no-repeat; background-size:180px 2px; background-position:center bottom;
-}
-
-/* 時間右側（PCはテーマのサイズでOK） */
-#campaign .campaign__time-number{
-  margin:0 0 0 12px; line-height:1; font-weight:900;
-  font-variant-numeric:tabular-nums; white-space:nowrap; text-align:left;
-  font-family:"ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif;
-}
-
-/* ===== スマホだけ“3行”に固定（店名 → 作業受付時間 → 時間） ===== */
-@media (max-width:767px){
-  #campaign .inner{ padding:24px 14px; }
-  #campaign .store02title{ margin-bottom:10px; }
-
-  /* ← ここがポイント：3行にするためブロック化＆中央寄せ */
-  #campaign .campaign__time{
-    display:block !important;
-    text-align:center !important;
-    margin-top:8px !important;            /* 白帯と重ならないよう少し下げる */
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:12px !important;
   }
 
-  /* 2行目：ラベル（下線は短めで1本） */
+  /* テーマの短い線（::before/::after）を完全オフ */
+  #campaign .campaign__time-text::before,
+  #campaign .campaign__time-text::after{
+    content:none !important; display:none !important;
+  }
+
+  /* 見出し「作業受付時間」の直下に“長い線”を1本だけ描く */
   #campaign .campaign__time-text{
-    display:block !important;
-    font-size:12px !important;
-    letter-spacing:.15em !important;
+    font-size:14px !important;
+    letter-spacing:.18em !important;
     padding-bottom:10px !important;
-    margin:0 auto 8px !important;
-    background-size:140px 2px !important;
+    background-image:linear-gradient(#fff,#fff) !important;
+    background-repeat:no-repeat !important;
+    background-position:center bottom !important;
+    background-size:calc(100vw - 48px) 2px !important; /* ← 画面幅いっぱいの長い線 */
   }
 
-  /* 3行目：時間（“サイズはほぼそのまま”で、はみ出さない範囲に自動縮小） */
+  /* 時間は中央寄せ・折返し無し。大き過ぎる端末は自動で縮小 */
   #campaign .campaign__time-number{
-    display:block !important;
-    margin:0 auto !important;
+    margin:0 !important;
     text-align:center !important;
-    line-height:1 !important;
-    font-weight:900 !important;
     white-space:nowrap !important;
     font-variant-numeric:tabular-nums !important;
-    font-size:clamp(28px, 7.5vw, 36px) !important;  /* はみ出し防止のみ */
-    max-width:92vw !important; overflow:hidden; text-overflow:ellipsis;
+    font-size:clamp(28px, 9vw, 44px) !important; /* PCは既存サイズ、SPは自動調整 */
   }
+
+  /* 下の“赤帯”はTELバーで隠す。白い余白は出さない */
+  body{ padding-bottom:0 !important; background:#fff !important; }
 }
 
-/* QA はテーマの見た目を使い、回答だけ開閉 */
-.qa_content .qa-content .qa__item-answer{ display:none; }
-.qa_content .qa-content li.is-open .qa__item-answer{ display:block; }
-/* 既存の＋画像を使うので疑似要素の＋/−は消す */
-.qa_content .qa__item--open::after{ content:none !important; }
-
-/* ===== スマホ固定TEL（重複対策＆“赤い帯”消し） ===== */
+/* ========== 固定TELバー（SP）— 高さアップ＆安全域対応、常に最前面 ========== */
 a.sticky-tel{
-  position:fixed; left:0; right:0; bottom:env(safe-area-inset-bottom,0);
-  display:block; background:var(--kobac-red); color:#fff; text-align:center; text-decoration:none;
-  padding:14px 0; font-weight:800; z-index:9999; line-height:1.2;
-  box-shadow:0 -3px 12px rgba(0,0,0,.15);
+  position:fixed; left:0; right:0; bottom:0;
+  display:flex; align-items:center; justify-content:center;
+  background:#E60012; color:#fff; text-decoration:none; font-weight:800;
+  min-height:64px;                     /* ← 高さをしっかり確保（元サイト寄り） */
+  padding:0 16px;
+  padding-bottom:calc(env(safe-area-inset-bottom,0) + 0px); /* iPhone下部安全域 */
+  z-index:9999;
+  box-shadow:0 -3px 12px rgba(0,0,0,.18);
 }
-/* モバイルはTELバー分だけ下余白を付ける（本文が隠れないように） */
-@media (max-width:767px){ body{ padding-bottom:62px !important; } }
-/* PCは非表示＆余白ゼロに戻す */
 @media (min-width:768px){
-  a.sticky-tel{ display:none !important; }
-  body{ padding-bottom:0 !important; }
+  a.sticky-tel{ display:none !important; }           /* PCは非表示（元サイト同等） */
 }
-/* ダブりを強制的に抑止（最後の1個だけ表示） */
-a.sticky-tel:not(:last-of-type){ display:none !important; }
-footer .sticky-tel, #footer .sticky-tel { display:none !important; }
 
-/* まれに“赤帯が残る”見え方対策（背景を白に固定） */
-html, body { background:#fff !important; }
-
-/* ===== SP：作業受付時間の“短い線”を消し、長い線だけ表示 ===== */
-@media (max-width: 767px){
-  /* まず背景で描いていた短い線を無効化 */
-  #campaign .campaign__time-text{
-    background: none !important;
-    position: relative;
-    padding-bottom: 12px !important; /* 線分のスペースは確保 */
-  }
-
-  /* もともと殺していた疑似要素をSPだけ再利用して“長い1本線”を描く */
-  #campaign .campaign__time-text::before{ content: none !important; display: none !important; }
-
-  #campaign .campaign__time-text::after{
-    content: "" !important;
-    display: block !important;
-    width: 92vw;            /* 画面幅いっぱいに長く */
-    max-width: 520px;       /* 端末の極端な横幅で太りすぎないように上限 */
-    height: 2px;
-    background: rgba(255,255,255,.9);
-    margin: 10px auto 0;    /* 中央配置 */
-  }
-}
+/* 念のため：フッター内などに誤って置かれた .sticky-tel は隠す */
+footer .sticky-tel, #footer .sticky-tel{ display:none !important; }
 </style>
 </head>
 
