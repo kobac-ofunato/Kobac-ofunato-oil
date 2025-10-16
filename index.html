@@ -27,7 +27,7 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="//typesquare.com/3/tsst/script/ja/typesquare.js?5bab21741898427c92a66ad2ac1e024a" charset="utf-8"></script>
 
- <style id="kobac-final">
+<style id="kobac-final">
 :root{ --kobac-red:#FF0000; }
 
 /* 電話以外の導線は非表示 */
@@ -37,7 +37,7 @@
 #campaign{ background:var(--kobac-red); color:#fff; }
 
 /* 店名（白帯） */
-#campaign .store02title{ text-align:center; margin: 0 0 10px; }
+#campaign .store02title{ text-align:center; margin: 0 0 12px; }
 #campaign .store02title span{
   display:block; padding:3px 10px; margin:0 5px;
   background:#fff; color:#000; border-radius:3px;
@@ -45,15 +45,14 @@
   font-family:"UD新ゴNT B","UD Shin Go NT Bold","UD Shin Go","Noto Sans JP",sans-serif;
 }
 
-/* 作業受付時間 行（PCもSPも横並びに固定） */
+/* 作業受付時間 行（PCはそのまま横並び） */
 #campaign .campaign__time{
   display:flex; align-items:center; justify-content:center; width:100%;
   gap: 16px;
   font-family:"ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif;
-  margin-top: 6px; /* 白帯とかぶらないよう少し下げる */
 }
 
-/* ラベル：下線は1本 */
+/* ラベルの下線は1本 */
 #campaign .campaign__time-text::before,
 #campaign .campaign__time-text::after{ content:none !important; display:none !important; }
 #campaign .campaign__time-text{
@@ -64,28 +63,41 @@
   white-space:nowrap;
 }
 
-/* 時間（サイズはそのまま） */
+/* 時間（PCは指定どおり） */
 #campaign .campaign__time-number{
-  margin:0 0 0 12px; /* ラベルの右に寄せる */
-  width:auto; text-align:left;
+  margin:0 0 0 12px; width:auto; text-align:left;
   font-size:53px; letter-spacing:.05em; line-height:1;
   font-weight:900; white-space:nowrap; font-variant-numeric:tabular-nums;
   font-family:"ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif;
 }
 
-/* スマホ最適化（横並び維持＋収まりやすく） */
+/* ===== スマホ最適化（はみ出し防止＆重なり回避） ===== */
 @media (max-width:767px){
-  #campaign .campaign__time{ gap:12px; }
-  #campaign .campaign__time-text{ font-size:14px; background-size:140px 2px; }
-  #campaign .campaign__time-number{ font-size:40px; }
+  /* 白帯と被らないよう少し下げる＋横並び維持 */
+  #campaign .campaign__time{
+    margin-top: 6px;
+    gap: 10px;
+    flex-wrap: nowrap;
+  }
+  /* ラベルは少し小さく＆下線短め */
+  #campaign .campaign__time-text{
+    font-size: 13px;
+    background-size:140px 2px;
+  }
+  /* 時間は縮小して収める（はみ出し防止） */
+  #campaign .campaign__time-number{
+    font-size: clamp(26px, 7.2vw, 36px);  /* ★スマホだけ小さめ */
+    letter-spacing:.04em;
+    max-width: 78vw;                      /* 横幅ガード */
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
 }
 
-/* QA：アコーディオン（CSS側はこれだけ残せばOK） */
+/* QAアコーディオン：CSSは最小限でOK */
 .qa_content .qa-content .qa__item-answer{ display:none; }
 .qa_content .qa-content li.is-open .qa__item-answer{ display:block; }
-/* 既存の＋アイコン画像を使うため、疑似要素の＋/−は出さない */
+/* 既存アイコン画像を使うため、疑似要素の＋/−は消す */
 .qa_content .qa__item--open::after{ content:none !important; }
-/* タップ取りこぼし防止 */
 .qa_content .qa__item-question{ cursor:pointer; position:relative; z-index:1; -webkit-tap-highlight-color:transparent; touch-action:manipulation; }
 .qa_content .qa__item-question img,
 .qa_content .qa__item-question .qa__item--open{ pointer-events:none; }
@@ -93,7 +105,7 @@
 
 <style id="kobac-sticky-tel">
 /* 固定TEL（SPのみ表示） */
-body .sticky-tel{
+a.sticky-tel{
   position: fixed !important;
   left: 0; right: 0; bottom: env(safe-area-inset-bottom, 0);
   display: block;
@@ -105,16 +117,21 @@ body .sticky-tel{
   box-shadow: 0 -3px 12px rgba(0,0,0,.15);
   -webkit-tap-highlight-color: transparent; touch-action: manipulation;
 }
-/* コンテンツが隠れないよう下に余白を確保（赤い帯が“残る”のを防ぐ） */
+/* コンテンツが隠れないよう下余白（赤い帯が“残る”のを防止） */
 @media (max-width:767px){
   body{ padding-bottom: 62px !important; }
 }
 /* PCでは非表示 */
 @media (min-width:768px){
-  body .sticky-tel{ display: none !important; }
+  a.sticky-tel{ display: none !important; }
 }
-/* 念のため、フッター内に誤って置かれた“非固定”の複製を隠す */
+/* 念のため：もし複数 .sticky-tel があっても最後の1つだけ表示 */
+a.sticky-tel:not(:last-of-type){ display:none !important; }
+/* フッター内に誤って置かれた複製は非表示 */
 footer .sticky-tel, #footer .sticky-tel { display:none !important; }
+
+/* 背景色の“赤”が残って見えるのを確実に防ぐ */
+html, body { background:#fff !important; }
 </style>
 </head>
 
