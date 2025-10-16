@@ -27,94 +27,95 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="//typesquare.com/3/tsst/script/ja/typesquare.js?5bab21741898427c92a66ad2ac1e024a" charset="utf-8"></script>
 
-  <!-- ====== 上書きCSS（1枚に統合） ====== -->
-  <style id="kobac-unified">
-  :root{ --kobac-red:#FF0000; --tel-h:56px; }
+ <style id="kobac-final">
+:root{ --kobac-red:#FF0000; }
 
-  /* 電話のみ導線（メール系は非表示） */
-  .pc-mail-btn, .contact__cont.mail, .mail-btn { display:none !important; }
+/* 電話以外の導線は非表示 */
+.pc-mail-btn, .contact__cont.mail, .mail-btn { display:none !important; }
 
-  /* キャンペーン帯 背景 */
-  #campaign{ background:var(--kobac-red); color:#fff; }
+/* キャンペーン帯 */
+#campaign{ background:var(--kobac-red); color:#fff; }
 
-  /* 店名（白帯） */
-  #campaign .store02title{ text-align:center; position:relative; z-index:1; margin:0 0 8px; }
-  #campaign .store02title span{
-    display:inline-block; padding:3px 10px; margin:0 5px;
-    background:#fff; color:#000; border-radius:3px;
-    font-size:28px;
-    font-family:"UD新ゴNT B","UD Shin Go NT Bold","UD Shin Go","Noto Sans JP",sans-serif;
-  }
+/* 店名（白帯） */
+#campaign .store02title{ text-align:center; margin: 0 0 10px; }
+#campaign .store02title span{
+  display:block; padding:3px 10px; margin:0 5px;
+  background:#fff; color:#000; border-radius:3px;
+  font-size:28px;
+  font-family:"UD新ゴNT B","UD Shin Go NT Bold","UD Shin Go","Noto Sans JP",sans-serif;
+}
 
-  /* 作業受付時間（行） */
-  #campaign .campaign__time{ position:relative; z-index:2; margin-top:8px; }
-  @media (min-width:768px){
-    #campaign .campaign__time{
-      display:flex; align-items:center; justify-content:center; gap:28px; width:100%;
-      font-family:"ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif;
-    }
-  }
+/* 作業受付時間 行（PCもSPも横並びに固定） */
+#campaign .campaign__time{
+  display:flex; align-items:center; justify-content:center; width:100%;
+  gap: 16px;
+  font-family:"ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif;
+  margin-top: 6px; /* 白帯とかぶらないよう少し下げる */
+}
 
-  /* ラベルの下線は1本だけ（背景で描画） */
-  #campaign .campaign__time-text::before,
-  #campaign .campaign__time-text::after{ content:none !important; display:none !important; }
-  #campaign .campaign__time-text{
-    letter-spacing:.15em; font-weight:700; padding-bottom:12px;
-    background-image:linear-gradient(#fff,#fff);
-    background-repeat:no-repeat; background-size:230px 2px; background-position:center bottom;
-  }
+/* ラベル：下線は1本 */
+#campaign .campaign__time-text::before,
+#campaign .campaign__time-text::after{ content:none !important; display:none !important; }
+#campaign .campaign__time-text{
+  letter-spacing:.15em; font-weight:700;
+  padding-bottom:10px;
+  background-image:linear-gradient(#fff,#fff);
+  background-repeat:no-repeat; background-size:180px 2px; background-position:center bottom;
+  white-space:nowrap;
+}
 
-  /* 時刻（PCの指定どおり） */
-  #campaign .campaign__time-number{
-    margin:0 0 0 25px; width:625px; text-align:left;
-    font-size:53px; letter-spacing:.05em; line-height:1;
-    font-weight:900; white-space:nowrap; font-variant-numeric:tabular-nums;
-    font-family:"ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif;
-  }
+/* 時間（サイズはそのまま） */
+#campaign .campaign__time-number{
+  margin:0 0 0 12px; /* ラベルの右に寄せる */
+  width:auto; text-align:left;
+  font-size:53px; letter-spacing:.05em; line-height:1;
+  font-weight:900; white-space:nowrap; font-variant-numeric:tabular-nums;
+  font-family:"ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif;
+}
 
-  /* スマホ最適化（横1列キープ・はみ出し防止） */
-  @media (max-width:767px){
-    #campaign .inner{ padding:20px 12px !important; }
-    #campaign .campaign__time{
-      display:flex !important; flex-direction:row !important;
-      align-items:center !important; justify-content:center !important; gap:12px !important;
-    }
-    #campaign .campaign__time-text{
-      font-size:13px !important; background-size:160px 2px !important;
-    }
-    #campaign .campaign__time-number{
-      width:auto !important; margin:0 !important; text-align:left !important;
-      font-size:34px !important; letter-spacing:.04em !important; white-space:nowrap !important;
-    }
-  }
+/* スマホ最適化（横並び維持＋収まりやすく） */
+@media (max-width:767px){
+  #campaign .campaign__time{ gap:12px; }
+  #campaign .campaign__time-text{ font-size:14px; background-size:140px 2px; }
+  #campaign .campaign__time-number{ font-size:40px; }
+}
 
-  /* QA：アコーディオン（初期クローズ、既存Q画像のみ） */
-  .qa_content .qa-content .qa__item-answer{ display:none; }
-  .qa_content .qa-content li.is-open .qa__item-answer{ display:block; }
-  .qa_content .qa__item--open::after{ content:none !important; }
-  .qa_content .qa__item-question{
-    cursor:pointer; position:relative; z-index:1;
-    -webkit-tap-highlight-color:transparent; touch-action:manipulation;
-  }
-  .qa_content .qa__item-question img,
-  .qa_content .qa__item-question .qa__item--open{ pointer-events:none; }
+/* QA：アコーディオン（CSS側はこれだけ残せばOK） */
+.qa_content .qa-content .qa__item-answer{ display:none; }
+.qa_content .qa-content li.is-open .qa__item-answer{ display:block; }
+/* 既存の＋アイコン画像を使うため、疑似要素の＋/−は出さない */
+.qa_content .qa__item--open::after{ content:none !important; }
+/* タップ取りこぼし防止 */
+.qa_content .qa__item-question{ cursor:pointer; position:relative; z-index:1; -webkit-tap-highlight-color:transparent; touch-action:manipulation; }
+.qa_content .qa__item-question img,
+.qa_content .qa__item-question .qa__item--open{ pointer-events:none; }
+</style>
 
-  /* スマホ固定TEL（必ず固定表示） */
-  @media (max-width:767px){
-    body{ padding-bottom: var(--tel-h); } /* 隠れ防止 */
-    .sticky-tel{
-      position:fixed !important; left:0; right:0; bottom:env(safe-area-inset-bottom,0) !important;
-      height:var(--tel-h) !important;
-      display:flex !important; align-items:center; justify-content:center;
-      background:#FF0000 !important; color:#fff !important; text-decoration:none !important;
-      font-weight:800 !important; z-index:9999 !important; line-height:1.2 !important;
-      box-shadow:0 -3px 12px rgba(0,0,0,.15);
-      -webkit-tap-highlight-color:transparent; touch-action:manipulation;
-    }
-    footer .sticky-tel, #footer .sticky-tel{ display:none !important; } /* フッター内の複製を無効化 */
-  }
-  @media (min-width:768px){ .sticky-tel{ display:none !important; } } /* PCは非表示 */
-  </style>
+<style id="kobac-sticky-tel">
+/* 固定TEL（SPのみ表示） */
+body .sticky-tel{
+  position: fixed !important;
+  left: 0; right: 0; bottom: env(safe-area-inset-bottom, 0);
+  display: block;
+  background: #FF0000; color: #fff; text-decoration: none; text-align: center;
+  padding: 14px 0;
+  font-weight: 800;
+  z-index: 9999;
+  line-height: 1.2;
+  box-shadow: 0 -3px 12px rgba(0,0,0,.15);
+  -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+}
+/* コンテンツが隠れないよう下に余白を確保（赤い帯が“残る”のを防ぐ） */
+@media (max-width:767px){
+  body{ padding-bottom: 62px !important; }
+}
+/* PCでは非表示 */
+@media (min-width:768px){
+  body .sticky-tel{ display: none !important; }
+}
+/* 念のため、フッター内に誤って置かれた“非固定”の複製を隠す */
+footer .sticky-tel, #footer .sticky-tel { display:none !important; }
+</style>
 </head>
 
 <body class="home blog">
