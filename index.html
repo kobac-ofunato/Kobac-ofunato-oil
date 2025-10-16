@@ -157,6 +157,76 @@
   @media (min-width: 768px){
     a.sticky-tel{ display:none !important; } /* PCは非表示 */
   }
+    /* ================================
+   電話バナー（#contact / #contact2）統一
+   1) SPは #contact2 を非表示（バナーは1つだけ）
+   2) 2つのセクションで余白/幅/表示を完全一致
+   3) 画像は等倍比で同一サイズに
+   ================================ */
+
+/* セクションの内側余白とセンタリングを統一 */
+#contact .inner,
+#contact2 .inner{
+  padding: 0 !important;
+}
+
+/* ラッパーの上下余白・センタリングを統一 */
+#contact .contact-2store,
+#contact2 .contact-2store{
+  padding: 16px 0 !important;
+  text-align: center;
+  line-height: 0;       /* 画像下のスキマ対策 */
+  background: #fff;
+  margin: 0 auto;
+}
+
+/* aをブロック化 & 同じ最大幅で中央寄せ（PC/SPで切替） */
+#contact .contact-2store a,
+#contact2 .contact-2store a{
+  display: block !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  max-width: 960px;               /* PC上限 */
+  border: 0;
+  box-shadow: none;
+}
+
+/* 画像サイズを完全一致（枠・余白は画像外の差を無効化） */
+#contact .contact-2store img,
+#contact2 .contact-2store img{
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  max-width: 960px;               /* PC上限 */
+  margin: 0 auto !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* PC/スマホの画像切替（同一ルールで適用） */
+@media (min-width: 768px){
+  /* PCはPC用だけ表示 */
+  .is-pc{ display: block !important; }
+  .is-sp{ display: none !important; }
+}
+@media (max-width: 767px){
+  /* SPはSP用だけ表示 */
+  .is-pc{ display: none !important; }
+  .is-sp{ display: block !important; }
+
+  /* SPは幅と高さ感を統一（“白枠の見え方”も揃う） */
+  #contact .contact-2store a,
+  #contact2 .contact-2store a{
+    max-width: 680px !important;  /* 元サイト寄りの上限幅 */
+  }
+  #contact .contact-2store img,
+  #contact2 .contact-2store img{
+    max-width: 680px !important;
+  }
+
+  /* ★SPはバナーを1つだけに（#contact2非表示） */
+  #contact2{ display: none !important; }
+}
   </style>
 </head>
 
