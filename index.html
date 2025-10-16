@@ -89,24 +89,29 @@
     body{ padding-bottom:0 !important; background:#fff !important; }
   }
 
-  /* ===== 電話バナー（画像）の見た目を統一：#contact と #contact2 ===== */
-  #contact .contact-2store,
-  #contact2 .contact-2store{ padding: 20px 0; }
-  #contact .contact-2store a,
-  #contact2 .contact-2store a{
-    display:block; max-width:960px; margin:0 auto;
+/* 電話バナー（画像）の見た目：.contact に統一 */
+.contact .contact-2store {
+  padding: 20px 0;
+}
+.contact .contact-2store a {
+  display: block;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.contact .contact-2store img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 767px) {
+  .contact .contact-2store {
+    padding: 12px 0;
   }
-  #contact .contact-2store img,
-  #contact2 .contact-2store img{
-    display:block; width:100%; height:auto;
+  .contact .contact-2store a {
+    max-width: 680px;
   }
-  #contact2{ margin-top:12px; }
-  @media (max-width: 767px){
-    #contact .contact-2store,
-    #contact2 .contact-2store{ padding:12px 0; }
-    #contact .contact-2store a,
-    #contact2 .contact-2store a{ max-width:680px; }
-  }
+}
 
   /* ===== QA（初期は閉じる／開いたliだけ表示） ===== */
   .qa_content .qa-content .qa__item-answer{ display:none; }
@@ -199,17 +204,17 @@
     </div>
   </section>
 
-  <!-- 電話セクション -->
-  <section id="contact" class="contact">
-    <div class="inner">
-      <div class="contact-2store">
-        <a href="tel:0120-589-196">
-          <img src="images/conact01.png" class="is-pc" alt="電話で問い合わせ">
-          <img src="images/conact01_sp.png" class="is-sp" alt="電話で問い合わせ">
-        </a>
-      </div>
+  <!-- 1回目の電話セクション -->
+<section class="contact">
+  <div class="inner">
+    <div class="contact-2store">
+      <a href="tel:0120-589-196">
+        <img src="images/conact01.png" class="is-pc" alt="電話で問い合わせ">
+        <img src="images/conact01_sp.png" class="is-sp" alt="電話で問い合わせ">
+      </a>
     </div>
-  </section>
+  </div>
+</section>
 
   <section id="engine" class="engine">
     <div class="inner">
@@ -238,17 +243,17 @@
     </div>
   </section>
 
-  <!-- 再度の電話導線 -->
-  <section id="contact2" class="contact">
-    <div class="inner">
-      <div class="contact-2store">
-        <a href="tel:0120-589-196">
-          <img src="images/conact01.png" class="is-pc" alt="電話で問い合わせ">
-          <img src="images/conact01_sp.png" class="is-sp" alt="電話で問い合わせ">
-        </a>
-      </div>
+ <!-- 2回目の電話セクション（IDなしでOK） -->
+<section class="contact">
+  <div class="inner">
+    <div class="contact-2store">
+      <a href="tel:0120-589-196">
+        <img src="images/conact01.png" class="is-pc" alt="電話で問い合わせ">
+        <img src="images/conact01_sp.png" class="is-sp" alt="電話で問い合わせ">
+      </a>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- お客様の声 -->
   <section id="voice_content" class="voice_content">
