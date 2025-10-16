@@ -86,6 +86,37 @@ a.sticky-tel{
 @media (min-width:767px){
   a.sticky-tel{ display:none !important; }           /* PCは非表示（元サイト同等） */
 }
+<style id="kobac-tel-banner-unify">
+/* 電話バナー（画像）の見た目を統一：#contact と #contact2 を同一ルールで */
+#contact .contact-2store,
+#contact2 .contact-2store{
+  padding: 20px 0;                 /* 上下の余白を統一 */
+}
+
+#contact .contact-2store a,
+#contact2 .contact-2store a{
+  display: block;
+  max-width: 960px;                /* 横幅の上限（必要に応じて調整） */
+  margin: 0 auto;                  /* 中央寄せ */
+}
+
+#contact .contact-2store img,
+#contact2 .contact-2store img{
+  display: block;
+  width: 100%;                     /* 画像をコンテナ幅にフィット */
+  height: auto;
+}
+
+/* もし2つ目だけ上の余白が詰まって見える端末がある場合の保険 */
+#contact2{ margin-top: 12px; }
+
+/* 小さめ画面はやや詰め気味に */
+@media (max-width: 767px){
+  #contact .contact-2store,
+  #contact2 .contact-2store{ padding: 12px 0; }
+  #contact .contact-2store a,
+  #contact2 .contact-2store a{ max-width: 680px; } /* スマホ時の上限 */
+}
 </style>
 </head>
 
