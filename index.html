@@ -132,6 +132,29 @@ footer .sticky-tel, #footer .sticky-tel { display:none !important; }
 
 /* まれに“赤帯が残る”見え方対策（背景を白に固定） */
 html, body { background:#fff !important; }
+
+/* ===== SP：作業受付時間の“短い線”を消し、長い線だけ表示 ===== */
+@media (max-width: 767px){
+  /* まず背景で描いていた短い線を無効化 */
+  #campaign .campaign__time-text{
+    background: none !important;
+    position: relative;
+    padding-bottom: 12px !important; /* 線分のスペースは確保 */
+  }
+
+  /* もともと殺していた疑似要素をSPだけ再利用して“長い1本線”を描く */
+  #campaign .campaign__time-text::before{ content: none !important; display: none !important; }
+
+  #campaign .campaign__time-text::after{
+    content: "" !important;
+    display: block !important;
+    width: 92vw;            /* 画面幅いっぱいに長く */
+    max-width: 520px;       /* 端末の極端な横幅で太りすぎないように上限 */
+    height: 2px;
+    background: rgba(255,255,255,.9);
+    margin: 10px auto 0;    /* 中央配置 */
+  }
+}
 </style>
 </head>
 
