@@ -127,6 +127,40 @@
   @media (min-width: 768px){
     a.sticky-tel{ display:none !important; } /* PCは非表示 */
   }
+    /* ===== TELバナー統一（contact01基準） ===== */
+#contact .contact-2store,
+#contact2 .contact-2store{
+  padding: 20px 0;               /* 上下余白を同じに */
+  background: #fff;               /* 白枠の見え方を合わせる（画像周りが白に） */
+}
+
+#contact .contact-2store a,
+#contact2 .contact-2store a{
+  display: block;
+  max-width: 960px;               /* PC時の最大幅を統一 */
+  margin: 0 auto;                 /* 中央寄せ */
+}
+
+#contact .contact-2store img,
+#contact2 .contact-2store img{
+  display: block;
+  width: 100%;                    /* 画像サイズをコンテナ基準で統一 */
+  height: auto;
+  margin: 0;                      /* 余白の差をゼロに */
+  border: 0;
+}
+
+/* スマホは contact01_sp と同じ見え方に寄せる */
+@media (max-width: 767px){
+  #contact .contact-2store,
+  #contact2 .contact-2store{
+    padding: 14px 0;              /* スマホ時の上下余白を同じに */
+  }
+  #contact .contact-2store a,
+  #contact2 .contact-2store a{
+    max-width: 680px;             /* スマホ時の横幅上限を同じに */
+  }
+}
   </style>
 </head>
 
