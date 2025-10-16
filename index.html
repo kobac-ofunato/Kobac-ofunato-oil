@@ -27,6 +27,7 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="//typesquare.com/3/tsst/script/ja/typesquare.js?5bab21741898427c92a66ad2ac1e024a" charset="utf-8"></script>
 
+  <!-- ====== 上書きCSSその1 ====== -->
   <style id="kobac-final">
 :root{ --kobac-red:#FF0000; }
 
@@ -93,25 +94,37 @@
 }
 .qa_content .qa__item-question img,
 .qa_content .qa__item-question .qa__item--open{ pointer-events:none; }
+  </style>
+
+  <!-- ====== 上書きCSSその2：固定TEL（SPのみ） ====== -->
   <style id="kobac-sticky-tel">
 /* —— 固定TEL（SPのみ表示）—— */
 body .sticky-tel{
-  position: fixed !important;   /* ← 他CSSに負けないように */
+  position: fixed !important;
   left: 0; right: 0; bottom: 0;
   display: block;
   background: #FF0000;
   color: #fff; text-decoration: none; text-align: center;
   padding: 14px 0;
   font-weight: 800;
-  z-index: 9999;                /* ← フッターより前面に */
+  z-index: 9999;
   line-height: 1.2;
   box-shadow: 0 -3px 12px rgba(0,0,0,.15);
-  -webkit-tap-highlight-color: transparent;       /* モバイルのタップ感度 */
+  -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
-@media (min-width: 768px){
-  body .sticky-tel{ display: none !important; }   /* ← PCは非表示を強制 */
+
+/* Stickyで隠れやすい下端を避ける */
+@media (max-width:767px){
+  body{ padding-bottom: 64px; }
 }
+
+/* PCでは非表示 */
+@media (min-width: 768px){
+  body .sticky-tel{ display: none !important; }
+}
+  </style>
+
 </style>
 </head>
 
