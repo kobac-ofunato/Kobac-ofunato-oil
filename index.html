@@ -227,6 +227,31 @@
   /* ★SPはバナーを1つだけに（#contact2非表示） */
   #contact2{ display: none !important; }
 }
+    /* 画像のデバイス切り替え（確実版） */
+img.is-pc, img.is-sp { width:100% !important; height:auto !important; display:block; }
+
+/* デフォはSP想定 */
+.is-pc { display:none !important; }
+.is-sp { display:block !important; }
+
+/* 768px以上はPCだけ表示 */
+@media (min-width: 768px){
+  .is-pc { display:block !important; }
+  .is-sp { display:none  !important; }
+}
+
+/* 電話バナーの白い枠・余白を統一（両セクション同じ見え方に） */
+#contact .inner, #contact2 .inner { padding:0 !important; }
+#contact .contact-2store, #contact2 .contact-2store {
+  padding:16px 0 !important; background:#fff; line-height:0; text-align:center;
+}
+#contact .contact-2store a, #contact2 .contact-2store a {
+  display:block !important; width:100% !important; margin:0 auto !important; max-width:960px;
+}
+/* スマホ時の上限幅（白枠の見え方を合わせる） */
+@media (max-width:767px){
+  #contact .contact-2store a, #contact2 .contact-2store a { max-width:680px !important; }
+}
   </style>
 </head>
 
