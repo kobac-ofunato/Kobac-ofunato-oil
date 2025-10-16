@@ -89,24 +89,54 @@
     body{ padding-bottom:0 !important; background:#fff !important; }
   }
 
-  /* ===== 電話バナー（画像）の見た目を統一：#contact と #contact2 ===== */
-  #contact .contact-2store,
-  #contact2 .contact-2store{ padding: 20px 0; }
+  /* === 電話バナーを #contact と #contact2 で完全同一にする === */
+
+/* セクション余白を統一（白の余白も同じに） */
+#contact, #contact2{
+  background: #fff;
+}
+#contact .inner, #contact2 .inner{
+  padding: 0 !important;                /* テーマ側の余白を打ち消す */
+}
+#contact .contact-2store, #contact2 .contact-2store{
+  padding: 20px 0 !important;           /* PCの上下余白 */
+}
+@media (max-width: 767px){
+  #contact .contact-2store, #contact2 .contact-2store{
+    padding: 12px 0 !important;         /* SPの上下余白（1つ目に合わせる） */
+  }
+}
+
+/* 横幅・配置を統一（中央寄せ、同じ最大幅） */
+#contact .contact-2store a,
+#contact2 .contact-2store a{
+  display: block !important;
+  width: 100% !important;
+  max-width: 960px !important;          /* PCの最大幅（1つ目に合わせる） */
+  margin: 0 auto !important;
+}
+@media (max-width: 767px){
   #contact .contact-2store a,
   #contact2 .contact-2store a{
-    display:block; max-width:960px; margin:0 auto;
+    max-width: 680px !important;        /* SPの最大幅（1つ目に合わせる） */
   }
-  #contact .contact-2store img,
-  #contact2 .contact-2store img{
-    display:block; width:100%; height:auto;
-  }
-  #contact2{ margin-top:12px; }
-  @media (max-width: 767px){
-    #contact .contact-2store,
-    #contact2 .contact-2store{ padding:12px 0; }
-    #contact .contact-2store a,
-    #contact2 .contact-2store a{ max-width:680px; }
-  }
+}
+
+/* 画像の表示を統一（ブロック化で下の謎の隙間も消す） */
+#contact .contact-2store img,
+#contact2 .contact-2store img{
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  margin: 0 auto !important;
+}
+
+/* 2つ目だけ上の余白が詰まるケースの保険（親の直前とのマージン潰れ対策） */
+#contact2{
+  /* 余白が足りない端末があればコメントアウト解除
+  margin-top: 12px !important;
+  */
+}
 
   /* ===== QA（初期は閉じる／開いたliだけ表示） ===== */
   .qa_content .qa-content .qa__item-answer{ display:none; }
