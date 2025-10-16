@@ -76,27 +76,15 @@
 a.sticky-tel{
   position:fixed; left:0; right:0; bottom:0;
   display:flex; align-items:center; justify-content:center;
-  background:#E60012; color:#fff; text-decoration:none; font-weight:800;
-  min-height:64px;                     /* ← 高さをしっかり確保（元サイト寄り） */
+  background:#39B54A; color:#fff; text-decoration:none; font-weight:800;
+  min-height:68px;                     /* ← 高さをしっかり確保（元サイト寄り） */
   padding:0 16px;
   padding-bottom:calc(env(safe-area-inset-bottom,0) + 0px); /* iPhone下部安全域 */
   z-index:9999;
   box-shadow:0 -3px 12px rgba(0,0,0,.18);
 }
-@media (min-width:768px){
+@media (min-width:767px){
   a.sticky-tel{ display:none !important; }           /* PCは非表示（元サイト同等） */
-}
-
-/* 念のため：フッター内などに誤って置かれた .sticky-tel は隠す */
-footer .sticky-tel, #footer .sticky-tel{ display:none !important; }
-  <style id="kobac-sticky-tel-tweak">
-/* SP：電話バナーを“数px”だけ高く & 色を #39B54A に */
-@media (max-width: 767px){
-  a.sticky-tel{
-    background:#39B54A !important;   /* 緑 */
-    min-height:68px !important;       /* 64px → 68px（数pxアップ） */
-    padding-bottom:calc(env(safe-area-inset-bottom,0) + 2px) !important;
-  }
 }
 </style>
 </head>
