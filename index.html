@@ -26,324 +26,45 @@
   <!-- フォント/JS（必要最小限に絞り、計測タグは削除） -->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="//typesquare.com/3/tsst/script/ja/typesquare.js?5bab21741898427c92a66ad2ac1e024a" charset="utf-8"></script>
+  
+  <style id="kobac-final">
+:root{ --kobac-red:#FF0000; }
 
-  <style>
-    /* 追加の上書き（佐世保→大船渡向けの微調整） */
-    :root { --kobac-red:#FF0000; }
-    .tel-only { text-align:center; margin: 12px 0 0; }
-    .tel-only .tel-cta { display:inline-block; background:var(--kobac-red); color:#fff; text-decoration:none;
-                         padding:12px 22px; border-radius:10px; font-weight:800; }
-    /* 電話固定ボタン（SP） */
-    .sticky-tel { position: fixed; left:0; right:0; bottom:0; display:block; background:var(--kobac-red);
-                  color:#fff; text-align:center; padding:14px 0; font-weight:800; text-decoration:none; z-index:200; }
-    @media (min-width: 768px) { .sticky-tel { display:none; } }
-
-    /* 参照テーマ依存の余白を若干詰める */
-    #campaign .campaign__time-number { font-weight: 800; }
-
-    /* ==== QA（アコーディオン）追加 ==== */
-    .qa_content .qa-content .qa__item-answer { display: none; }
-    .qa_content .qa-content li.is-open .qa__item-answer { display: block; }
-    .qa_content .qa__item-question { cursor: pointer; }
-    .qa_content .qa__item--open::after {
-      content: "+";
-      display: inline-block;
-      margin-left: 8px;
-      font-weight: 900;
-      transform: rotate(0deg);
-      transition: transform .2s ease;
-    }
-    .qa_content .qa-content li.is-open .qa__item--open::after {
-      content: "−";
-      transform: rotate(180deg);
-    }
-    /* 疑似要素の＋/−を消す（既存アイコン画像だけ表示） */
-.qa_content .qa__item--open::after { content: none !important; }
-    /* ===== キャンペーン帯（見出し＋時間）を“元サイト寄り”に調整 ===== */
-#campaign { background: var(--kobac-red, #FF0000); color: #fff; }
-
-/* 白い帯の店名（中央で太く） */
-#campaign .store02title { text-align: center; margin: 0 0 12px; }
-#campaign .store02title span{
-  display: inline-block;
-  background: #fff;
-  color: #111;
-  font-weight: 900;               /* 太く */
-  letter-spacing: .06em;
-  padding: 8px 24px;
-  border-radius: 2px;
-  line-height: 1.2;
-  font-size: clamp(18px, 2.3vw, 30px);
-}
-
-/* 「作業受付時間」＋ 時刻 の横並びとセンター寄せ */
-#campaign .campaign__time{
-  display: flex;
-  align-items: center;
-  justify-content: center;        /* センター寄せ */
-  gap: clamp(16px, 6vw, 56px);    /* 左ラベルとの間隔 */
-  margin: 0 auto;
-}
-
-/* 左のラベル（細め→中太、下に白いライン） */
-#campaign .campaign__time-text{
-  font-weight: 700;
-  letter-spacing: .2em;
-  font-size: clamp(14px, 1.8vw, 20px);
-  position: relative;
-  text-align: center;
-}
-#campaign .campaign__time-text::after{
-  content:"";
-  display:block;
-  width: clamp(120px, 18vw, 260px);
-  height: 2px;
-  background: rgba(255,255,255,.85);
-  margin: 10px auto 0;
-}
-
-/* 右の時刻（超太・数字幅を等幅化・上下中央に“ドン”） */
-#campaign .campaign__time-number{
-  margin: 0;
-  line-height: 1;                 /* 余白を詰める */
-  font-weight: 900;               /* 太く */
-  letter-spacing: .08em;
-  font-size: clamp(44px, 10vw, 120px);
-  font-variant-numeric: tabular-nums; /* 数字幅を揃える */
-  text-align: center;
-  text-rendering: optimizeLegibility;
-}
-
-/* スマホはやや詰め気味に */
-@media (max-width: 767px){
-  #campaign .campaign__time{
-    flex-direction: column;
-    gap: 10px;
-  }
-  #campaign .campaign__time-number{
-    font-size: clamp(40px, 14vw, 72px);
-    letter-spacing: .04em;
-  }
-}
-    /* ===== キャンペーン帯をコンパクトに調整（上書き） ===== */
-
-/* セクション余白をやや控えめに */
-#campaign .inner { max-width: 1100px; margin: 0 auto; padding: 24px 16px !important; }
-
-/* 店名の白帯を少し小さく */
-#campaign .store02title span{
-  font-size: clamp(18px, 1.8vw, 26px) !important;
-  padding: 6px 18px !important;
-}
-
-/* ラベルと時刻の間隔を詰める＆中央寄せ維持 */
-#campaign .campaign__time{
-  gap: clamp(12px, 4vw, 36px) !important;
-  justify-content: center !important;
-}
-
-/* ラベルは中太＆やや小さめに */
-#campaign .campaign__time-text{
-  font-size: clamp(13px, 1.4vw, 18px) !important;
-  letter-spacing: .16em !important;
-}
-#campaign .campaign__time-text::after{
-  width: clamp(110px, 14vw, 220px) !important;
-}
-
-/* 時刻の最大サイズを抑える（ここが効きどころ） */
-#campaign .campaign__time-number{
-  font-size: clamp(36px, 6.5vw, 88px) !important;  /* ← 上限88pxに縮小 */
-  line-height: .95 !important;
-  letter-spacing: .06em !important;
-  font-weight: 900 !important;
-  font-variant-numeric: tabular-nums !important;
-  margin: 0 !important;
-  text-align: center !important;
-}
-
-/* 超ワイド画面ではさらに抑制 */
-@media (min-width: 1400px){
-  #campaign .campaign__time-number{ font-size: 80px !important; }
-}
-@media (max-width: 767px){
-  #campaign .campaign__time{ flex-direction: column; gap: 8px !important; }
-  #campaign .campaign__time-number{ font-size: clamp(34px, 12vw, 64px) !important; }
-}
-    /* === さらに小さく＆1行で収める（上書き） === */
-
-/* 横幅を抑えて中央に */
-#campaign .inner{ max-width: 960px !important; padding: 20px 12px !important; }
-
-/* 店名の白帯を小さめに */
-#campaign .store02title span{
-  font-size: clamp(16px, 1.4vw, 22px) !important;
-  padding: 6px 14px !important;
-}
-
-/* ラベルと時刻の間隔をさらに詰める */
-#campaign .campaign__time{
-  gap: clamp(8px, 2.6vw, 22px) !important;
-  flex-wrap: nowrap !important;                  /* 折り返さない */
-  justify-content: center !important;
-}
-
-/* ラベルも少し小さめ */
-#campaign .campaign__time-text{
-  font-size: clamp(12px, 1.2vw, 16px) !important;
-  letter-spacing: .14em !important;
-}
-#campaign .campaign__time-text::after{
-  width: clamp(96px, 12vw, 180px) !important;
-}
-
-/* ★時刻：さらに縮小＆1行固定 */
-#campaign .campaign__time-number{
-  font-size: clamp(30px, 4.6vw, 56px) !important; /* ← 上限56px */
-  letter-spacing: .04em !important;
-  line-height: 1 !important;
-  font-weight: 900 !important;
-  font-variant-numeric: tabular-nums !important;
-  margin: 0 !important;
-  white-space: nowrap !important;                 /* ← 1行に固定 */
-  text-align: center !important;
-}
-
-/* 超ワイド画面では上限さらに抑制（任意） */
-@media (min-width: 1400px){
-  #campaign .campaign__time-number{ font-size: 52px !important; }
-}
-@media (max-width: 767px){
-  #campaign .campaign__time{ flex-direction: column; gap: 8px !important; }
-  #campaign .campaign__time-number{ font-size: clamp(28px, 10.5vw, 48px) !important; }
-}
-    /* =======================
-   店名（白帯）
-   ======================= */
-#campaign .store02title { text-align: center !important; }
-#campaign .store02title span{
-  display: block !important;
-  padding: 3px 10px !important;
-  margin: 0 5px !important;
-  background-color: #fff !important;
-  color: #000 !important;
-  font-size: 28px !important;
-  /* UD新ゴ指定（TypeSquare前提）。なければ近い太字にフォールバック */
-  font-family: "UD新ゴNT B","UD Shin Go NT Bold","UD Shin Go","Noto Sans JP",sans-serif !important;
-  border-radius: 3px !important;
-}
-
-/* =======================
-   作業受付時間（ラベル＋時間）行
-   ======================= */
-@media screen and (min-width: 768px){
-  .campaign__time{
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 100% !important;
-    /* 行全体の基本フォントに ゴシックMB101 H を指定 */
-    font-family: "ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif !important;
-    gap: 28px !important; /* ラベルと時間の間隔はお好みで */
-  }
-}
-
-/* ラベル（作業受付時間）：下線は1本だけに */
-#campaign .campaign__time-text{
-  position: relative !important;
-  font-weight: 700 !important;
-  letter-spacing: .15em !important;
-}
-#campaign .campaign__time-text::before{ display:none !important; } /* テーマ側で2本出している場合を無効化 */
-#campaign .campaign__time-text::after{
-  content:"" !important;
-  display:block !important;
-  width: 230px !important;       /* 長さはお好みで */
-  height: 2px !important;
-  background: rgba(255,255,255,.9) !important;
-  margin: 12px 0 0 !important;
-}
-
-/* 時刻（11：00〜17：30 など） */
-#campaign .campaign__time-number{
-  margin: 0 0 0 25px !important; /* ← ご指定 */
-  font-size: 53px !important;    /* ← ご指定（PC） */
-  letter-spacing: .05em !important; /* ← ご指定 */
-  width: 625px !important;       /* ← ご指定（PC） */
-  text-align: left !important;   /* ← ご指定 */
-  line-height: 1 !important;
-  font-weight: 900 !important;
-  font-family: "ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif !important;
-  font-variant-numeric: tabular-nums !important; /* 数字幅を揃えてズレを軽減 */
-  white-space: nowrap !important; /* 改行を防止 */
-}
-
-/* -----------------------
-   スマホ時の最適化（任意）
-   ----------------------- */
-@media (max-width: 767px){
-  #campaign .campaign__time{
-    flex-direction: column !important;
-    gap: 10px !important;
-  }
-  #campaign .campaign__time-number{
-    width: auto !important;
-    margin: 0 !important;
-    text-align: center !important;
-    font-size: 40px !important; /* スマホはやや小さめに */
-    letter-spacing: .03em !important;
-    white-space: normal !important; /* スマホでは改行許可でもOK */
-  }
-}
-    /* 下線を1本に統一：既存の擬似要素は全消し */
-#campaign .campaign__time-text::before,
-#campaign .campaign__time-text::after{
-  content: none !important;
-  display: none !important;
-}
-
-/* 擬似要素ではなく背景で1本線を描く */
-#campaign .campaign__time-text{
-  border: 0 !important;
-  background-image: none !important;
-  padding-bottom: 12px !important;                 /* 文字下に余白 */
-  background-image: linear-gradient(#fff, #fff);   /* 白の線 */
-  background-repeat: no-repeat;
-  background-size: 230px 2px;                      /* 線の長さ/太さ ←お好みで調整 */
-  background-position: center bottom;              /* 中央配置・下端に表示 */
-}
-  </style>
-  <style id="kobac-ofunato">
-/* --- メール導線は非表示（電話のみ） --- */
+/* 電話のみ導線（メール系は非表示） */
 .pc-mail-btn, .contact__cont.mail, .mail-btn { display:none !important; }
 
-/* --- 店名（白帯） UD新ゴ（Bold） --- */
-#campaign .store02title { text-align:center; }
+/* キャンペーン帯の背景色（赤） */
+#campaign{ background:var(--kobac-red); color:#fff; }
+
+/* 店名（白帯）— UD新ゴ Bold 指定 */
+#campaign .store02title{ text-align:center; }
 #campaign .store02title span{
   display:block; padding:3px 10px; margin:0 5px;
   background:#fff; color:#000; border-radius:3px;
-  font-size:28px; font-family:"UD新ゴNT B","UD Shin Go NT Bold","UD Shin Go","Noto Sans JP",sans-serif;
+  font-size:28px;
+  font-family:"UD新ゴNT B","UD Shin Go NT Bold","UD Shin Go","Noto Sans JP",sans-serif;
 }
 
-/* --- 作業受付時間 行（横並び&中央寄せ、行フォント指定） --- */
+/* 作業受付時間 行：横並び＆中央寄せ（行フォント＝ゴシックMB101 H） */
 @media (min-width:768px){
   .campaign__time{
     display:flex; align-items:center; justify-content:center; width:100%;
-    font-family:"ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif;
     gap:28px;
+    font-family:"ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif;
   }
 }
 
-/* 下線は1本だけ（疑似要素は殺して背景1本線に） */
+/* ラベルの下線は“1本のみ”に統一（疑似要素は殺して背景で描画） */
 #campaign .campaign__time-text::before,
 #campaign .campaign__time-text::after{ content:none !important; display:none !important; }
 #campaign .campaign__time-text{
-  padding-bottom:12px; background-image:linear-gradient(#fff,#fff);
-  background-repeat:no-repeat; background-size:230px 2px; background-position:center bottom;
   letter-spacing:.15em; font-weight:700;
+  padding-bottom:12px; border:0 !important; background-image:none !important;
+  background-image:linear-gradient(#fff,#fff);
+  background-repeat:no-repeat; background-size:230px 2px; background-position:center bottom;
 }
 
-/* --- 時間（9:00〜17:00） 見た目指定：左寄せ・幅固定・サイズ53px --- */
+/* 時刻（左寄せ・幅固定・サイズ53px） */
 #campaign .campaign__time-number{
   margin:0 0 0 25px; width:625px; text-align:left;
   font-size:53px; letter-spacing:.05em; line-height:1;
@@ -351,7 +72,7 @@
   font-family:"ゴシックMB101 H","Gothic MB101 H","Noto Sans JP",sans-serif;
 }
 
-/* スマホは自動調整（はみ出し防止） */
+/* スマホ最適化（はみ出し防止） */
 @media (max-width:767px){
   #campaign .campaign__time{ flex-direction:column; gap:10px; }
   #campaign .campaign__time-number{
@@ -360,12 +81,18 @@
   }
 }
 
-/* --- QA：アコーディオン（初期クローズ＆既存＋アイコン優先） --- */
+/* QA：アコーディオン（初期クローズ、画像＋記号は既存の画像のみ使用） */
 .qa_content .qa-content .qa__item-answer{ display:none; }
 .qa_content .qa-content li.is-open .qa__item-answer{ display:block; }
-/* もし疑似要素の「＋/−」が出ていたら無効化（画像アイコンを使うため） */
+/* 擬似要素の＋/−は出さない（既存のアイコン画像を使う） */
 .qa_content .qa__item--open::after{ content:none !important; }
-.qa_content .qa__item-question{ cursor:pointer; }
+/* スマホでのタップ取りこぼし防止 */
+.qa_content .qa__item-question{
+  cursor:pointer; position:relative; z-index:1;
+  -webkit-tap-highlight-color:transparent; touch-action:manipulation;
+}
+.qa_content .qa__item-question img,
+.qa_content .qa__item-question .qa__item--open{ pointer-events:none; }
 </style>
 </head>
 
@@ -610,26 +337,41 @@
   <a href="tel:0120-589-196" class="sticky-tel">📞 今すぐ電話</a>
 
   <!-- QAアコーディオン用JS（jQuery不要） -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      document.querySelectorAll('.qa_content .qa__item-question').forEach(function(q){
-        q.addEventListener('click', function(){
-          var li = q.closest('li');
-          if (!li) return;
-          li.classList.toggle('is-open');
-        });
-      });
-    });
-  </script>
-  <script id="kobac-ofunato">
-document.addEventListener('DOMContentLoaded', function(){
-  document.querySelectorAll('.qa_content .qa__item-question').forEach(function(q){
-    q.addEventListener('click', function(){
-      var li = q.closest('li'); if(!li) return;
-      li.classList.toggle('is-open');
-    });
+  <script id="kobac-final-qa">
+(function () {
+  function toggle(li){ if(li) li.classList.toggle('is-open'); }
+
+  function onPress(e){
+    const q = e.target.closest('.qa_content .qa__item-question');
+    if(!q) return;
+    e.preventDefault();           // 画像等の既定動作を抑止（モバイル安定）
+    toggle(q.closest('li'));
+  }
+
+  document.addEventListener('click', onPress, { passive:false });
+  document.addEventListener('touchstart', onPress, { passive:false });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' '){
+      const q = e.target.closest('.qa_content .qa__item-question');
+      if(q){ e.preventDefault(); toggle(q.closest('li')); }
+    }
   });
-});
+})();
+    /* 電話ボタン（MV内の赤いボタン） */
+.tel-only { text-align:center; margin: 12px 0 0; }
+.tel-only .tel-cta {
+  display:inline-block; background:var(--kobac-red); color:#fff; text-decoration:none;
+  padding:12px 22px; border-radius:10px; font-weight:800;
+}
+
+/* スマホ下部固定のTELボタン */
+.sticky-tel {
+  position: fixed; left:0; right:0; bottom:0; display:block;
+  background:var(--kobac-red); color:#fff; text-align:center;
+  padding:14px 0; font-weight:800; text-decoration:none; z-index:200;
+}
+@media (min-width: 768px){ .sticky-tel{ display:none; } }
 </script>
 </body>
 </html>
