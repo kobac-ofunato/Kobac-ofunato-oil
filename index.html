@@ -27,97 +27,107 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="//typesquare.com/3/tsst/script/ja/typesquare.js?5bab21741898427c92a66ad2ac1e024a" charset="utf-8"></script>
 
-<style id="kobac-sp-fixes">
-/* ========== スマホだけ：店名 → 作業受付時間 → 時間（3行） & 下線は長い1本だけ ========== */
-@media (max-width: 767px){
-  #campaign .inner{ padding:20px 12px !important; }
-  #campaign .store02title{ margin-bottom:10px !important; }
+  <!-- ===== 上書きCSS ===== -->
+  <style id="kobac-custom">
+  :root{ --kobac-red:#E60012; }
 
-  /* 見出し行を縦積み・中央寄せ */
-  #campaign .campaign__time{
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:center !important;
-    justify-content:center !important;
-    gap:12px !important;
+  /* メール導線は非表示（電話誘導のみ） */
+  .pc-mail-btn, .contact__cont.mail, .mail-btn { display:none !important; }
+
+  /* キャンペーン帯の背景色だけ指定（他はテーマに任せる） */
+  #campaign{ background:var(--kobac-red); color:#fff; }
+
+  /* 店名（白帯） */
+  #campaign .store02title{ text-align:center; margin:0 0 10px; }
+  #campaign .store02title span{
+    display:block; padding:3px 10px; margin:0 5px; background:#fff; color:#000;
+    border-radius:3px; font-size:28px;
+    font-family:"UD新ゴNT B","UD Shin Go NT Bold","UD Shin Go","Noto Sans JP",sans-serif;
   }
 
-  /* テーマの短い線（::before/::after）を完全オフ */
-  #campaign .campaign__time-text::before,
-  #campaign .campaign__time-text::after{
-    content:none !important; display:none !important;
+  /* ===== スマホだけ：店名 → 作業受付時間 → 時間（3行） & 下線は長い1本だけ ===== */
+  @media (max-width: 767px){
+    #campaign .inner{ padding:20px 12px !important; }
+    #campaign .store02title{ margin-bottom:10px !important; }
+
+    /* 見出し行を縦積み・中央寄せ */
+    #campaign .campaign__time{
+      display:flex !important;
+      flex-direction:column !important;
+      align-items:center !important;
+      justify-content:center !important;
+      gap:12px !important;
+    }
+
+    /* テーマの短い線（::before/::after）を完全オフ */
+    #campaign .campaign__time-text::before,
+    #campaign .campaign__time-text::after{
+      content:none !important; display:none !important;
+    }
+
+    /* 見出し「作業受付時間」の直下に“長い線”を1本だけ描く */
+    #campaign .campaign__time-text{
+      font-size:14px !important;
+      letter-spacing:.18em !important;
+      padding-bottom:10px !important;
+      background-image:linear-gradient(#fff,#fff) !important;
+      background-repeat:no-repeat !important;
+      background-position:center bottom !important;
+      background-size:calc(100vw - 48px) 2px !important; /* 画面幅いっぱいの長い線 */
+    }
+
+    /* 時間は中央寄せ・折返し無し。大き過ぎる端末は自動で縮小 */
+    #campaign .campaign__time-number{
+      margin:0 !important;
+      text-align:center !important;
+      white-space:nowrap !important;
+      font-variant-numeric:tabular-nums !important;
+      font-size:clamp(28px, 9vw, 44px) !important;
+    }
+
+    /* ページ最下部の余白は無し（赤帯はTELバーで隠す） */
+    body{ padding-bottom:0 !important; background:#fff !important; }
   }
 
-  /* 見出し「作業受付時間」の直下に“長い線”を1本だけ描く */
-  #campaign .campaign__time-text{
-    font-size:14px !important;
-    letter-spacing:.18em !important;
-    padding-bottom:10px !important;
-    background-image:linear-gradient(#fff,#fff) !important;
-    background-repeat:no-repeat !important;
-    background-position:center bottom !important;
-    background-size:calc(100vw - 48px) 2px !important; /* ← 画面幅いっぱいの長い線 */
-  }
-
-  /* 時間は中央寄せ・折返し無し。大き過ぎる端末は自動で縮小 */
-  #campaign .campaign__time-number{
-    margin:0 !important;
-    text-align:center !important;
-    white-space:nowrap !important;
-    font-variant-numeric:tabular-nums !important;
-    font-size:clamp(28px, 9vw, 44px) !important; /* PCは既存サイズ、SPは自動調整 */
-  }
-
-  /* 下の“赤帯”はTELバーで隠す。白い余白は出さない */
-  body{ padding-bottom:0 !important; background:#fff !important; }
-}
-
-/* ========== 固定TELバー（SP）— 高さアップ＆安全域対応、常に最前面 ========== */
-a.sticky-tel{
-  position:fixed; left:0; right:0; bottom:0;
-  display:flex; align-items:center; justify-content:center;
-  background:#39B54A; color:#fff; text-decoration:none; font-weight:800;
-  min-height:70px;                     /* ← 高さをしっかり確保（元サイト寄り） */
-  padding:0 16px;
-  padding-bottom:calc(env(safe-area-inset-bottom,0) + 0px); /* iPhone下部安全域 */
-  z-index:9999;
-  box-shadow:0 -3px 12px rgba(0,0,0,.18);
-}
-@media (min-width:767px){
-  a.sticky-tel{ display:none !important; }           /* PCは非表示（元サイト同等） */
-}
-<style id="kobac-tel-banner-unify">
-/* 電話バナー（画像）の見た目を統一：#contact と #contact2 を同一ルールで */
-#contact .contact-2store,
-#contact2 .contact-2store{
-  padding: 20px 0;                 /* 上下の余白を統一 */
-}
-
-#contact .contact-2store a,
-#contact2 .contact-2store a{
-  display: block;
-  max-width: 960px;                /* 横幅の上限（必要に応じて調整） */
-  margin: 0 auto;                  /* 中央寄せ */
-}
-
-#contact .contact-2store img,
-#contact2 .contact-2store img{
-  display: block;
-  width: 100%;                     /* 画像をコンテナ幅にフィット */
-  height: auto;
-}
-
-/* もし2つ目だけ上の余白が詰まって見える端末がある場合の保険 */
-#contact2{ margin-top: 12px; }
-
-/* 小さめ画面はやや詰め気味に */
-@media (max-width: 767px){
+  /* ===== 電話バナー（画像）の見た目を統一：#contact と #contact2 ===== */
   #contact .contact-2store,
-  #contact2 .contact-2store{ padding: 12px 0; }
+  #contact2 .contact-2store{ padding: 20px 0; }
   #contact .contact-2store a,
-  #contact2 .contact-2store a{ max-width: 680px; } /* スマホ時の上限 */
-}
-</style>
+  #contact2 .contact-2store a{
+    display:block; max-width:960px; margin:0 auto;
+  }
+  #contact .contact-2store img,
+  #contact2 .contact-2store img{
+    display:block; width:100%; height:auto;
+  }
+  #contact2{ margin-top:12px; }
+  @media (max-width: 767px){
+    #contact .contact-2store,
+    #contact2 .contact-2store{ padding:12px 0; }
+    #contact .contact-2store a,
+    #contact2 .contact-2store a{ max-width:680px; }
+  }
+
+  /* ===== QA（初期は閉じる／開いたliだけ表示） ===== */
+  .qa_content .qa-content .qa__item-answer{ display:none; }
+  .qa_content .qa-content li.is-open .qa__item-answer{ display:block; }
+  .qa_content .qa__item-question{ cursor:pointer; -webkit-tap-highlight-color:transparent; }
+
+  /* ===== 固定TELバー（SPのみ表示）— 緑(#39B54A)・高さUP・安全域対応 ===== */
+  a.sticky-tel{
+    position:fixed; left:0; right:0; bottom:0;
+    display:flex; align-items:center; justify-content:center;
+    background:#39B54A; color:#fff; text-decoration:none; font-weight:800;
+    min-height:74px;           /* すこし高め（元サイトの赤帯を隠す） */
+    padding:0 16px;
+    padding-bottom:calc(env(safe-area-inset-bottom,0) + 0px);
+    z-index:9999;
+    box-shadow:0 -3px 12px rgba(0,0,0,.18);
+  }
+  @media (min-width: 768px){
+    a.sticky-tel{ display:none !important; } /* PCは非表示 */
+  }
+  </style>
 </head>
 
 <body class="home blog">
@@ -140,7 +150,7 @@ a.sticky-tel{
         <img src="images/sp-mv-img.jpg" alt="エンジンオイル交換キャンペーン">
       </picture>
 
-      <!-- 電話のみ導線に変更 -->
+      <!-- 電話のみ導線 -->
       <div class="contact-nav">
         <div class="tel-only">
           <a class="tel-cta" href="tel:0120-589-196">📞 0120-589-196 に電話する</a>
@@ -189,7 +199,7 @@ a.sticky-tel{
     </div>
   </section>
 
-  <!-- 電話セクション（電話のみ） -->
+  <!-- 電話セクション -->
   <section id="contact" class="contact">
     <div class="inner">
       <div class="contact-2store">
@@ -245,7 +255,7 @@ a.sticky-tel{
     <div class="inner">
       <picture class="voiceTitle">
         <source srcset="images/voice_content.svg" media="(min-width: 768px)"/>
-        <img src="images/voice_content.svg" alt="お客様の声">
+        <img src="images/voice_content.svg" alt="よくある質問">
       </picture>
       <ul>
         <li>
@@ -357,48 +367,45 @@ a.sticky-tel{
     <div class="pagetop"><a href="#mv"><img src="images/pagetop.svg" alt=""></a></div>
   </footer>
 
- <!-- QAアコーディオン：1本に統合 -->
-<script id="qa-accordion">
-(function () {
-  function toggle(li) {
-    if (!li) return;
-    li.classList.toggle('is-open');
-    // ARIA（任意）：開閉状態を反映
-    const btn = li.querySelector('.qa__item-question');
-    if (btn) btn.setAttribute('aria-expanded', li.classList.contains('is-open') ? 'true' : 'false');
-  }
+  <!-- QAアコーディオン（1本に統合） -->
+  <script id="qa-accordion">
+  (function () {
+    function toggle(li) {
+      if (!li) return;
+      li.classList.toggle('is-open');
+      const btn = li.querySelector('.qa__item-question');
+      if (btn) btn.setAttribute('aria-expanded', li.classList.contains('is-open') ? 'true' : 'false');
+    }
 
-  function onPress(e) {
-    const q = e.target.closest('.qa_content .qa__item-question');
-    if (!q) return;
-    e.preventDefault(); // 画像のドラッグなど既定動作を抑止（スマホ安定化）
-    toggle(q.closest('li'));
-  }
+    function onPress(e) {
+      const q = e.target.closest('.qa_content .qa__item-question');
+      if (!q) return;
+      e.preventDefault();
+      toggle(q.closest('li'));
+    }
 
-  // クリック/タッチは「イベント委譲」で1本だけ登録
-  document.addEventListener('click', onPress, { passive: false });
-  document.addEventListener('touchstart', onPress, { passive: false });
+    document.addEventListener('click', onPress, { passive: false });
+    document.addEventListener('touchstart', onPress, { passive: false });
 
-  // キーボード対応（Enter/Space）
-  document.addEventListener('keydown', function (e) {
-    if (e.key !== 'Enter' && e.key !== ' ') return;
-    const q = e.target.closest('.qa_content .qa__item-question');
-    if (!q) return;
-    e.preventDefault();
-    toggle(q.closest('li'));
-  });
-
-  // 初期ARIA（任意）
-  document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.qa_content .qa__item-question').forEach(function (q) {
-      q.setAttribute('role', 'button');
-      q.setAttribute('tabindex', '0');
-      q.setAttribute('aria-expanded', 'false');
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      const q = e.target.closest('.qa_content .qa__item-question');
+      if (!q) return;
+      e.preventDefault();
+      toggle(q.closest('li'));
     });
-  });
-})();
-</script>
 
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.qa_content .qa__item-question').forEach(function (q) {
+        q.setAttribute('role', 'button');
+        q.setAttribute('tabindex', '0');
+        q.setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
+  </script>
+
+  <!-- SP固定TEL -->
   <a href="tel:0120-589-196" class="sticky-tel" aria-label="今すぐ電話（0120-589-196）">📞 今すぐ電話</a>
 </body>
 </html>
