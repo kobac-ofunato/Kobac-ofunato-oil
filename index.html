@@ -89,6 +89,15 @@ a.sticky-tel{
 
 /* 念のため：フッター内などに誤って置かれた .sticky-tel は隠す */
 footer .sticky-tel, #footer .sticky-tel{ display:none !important; }
+  <style id="kobac-sticky-tel-tweak">
+/* SP：電話バナーを“数px”だけ高く & 色を #39B54A に */
+@media (max-width: 767px){
+  a.sticky-tel{
+    background:#39B54A !important;   /* 緑 */
+    min-height:68px !important;       /* 64px → 68px（数pxアップ） */
+    padding-bottom:calc(env(safe-area-inset-bottom,0) + 2px) !important;
+  }
+}
 </style>
 </head>
 
