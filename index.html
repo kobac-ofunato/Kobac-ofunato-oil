@@ -118,13 +118,23 @@
   }
 }
 @media (max-width: 767px) {
-  /* 画像の最大幅・最大高さを制限する */
-  #contact .contact-2store img,
   #contact2 .contact-2store img {
-    max-width: 100%;      /* 親要素の幅を超えない */
+    max-width: 90vw;      /* 幅を画面の90%に制限（必要に応じて調整） */
     height: auto;
-    max-height: 200px;    /* 好きな高さに制限。調整必須 */
+    display: block;
+    margin: 0 auto;
     object-fit: contain;
+  }
+}
+@media (max-width: 767px) {
+  #contact2 .contact-2store {
+    text-align: center;
+  }
+
+  #contact2 .contact-2store a {
+    display: inline-block;
+    width: auto;
+    max-width: 100%;
   }
 }
   /* ===== QA（初期は閉じる／開いたliだけ表示） ===== */
