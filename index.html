@@ -117,6 +117,16 @@
     padding-bottom: 8vw; /* 元サイトのSP設定と合わせる */
   }
 }
+@media (max-width: 767px) {
+  /* 画像の最大幅・最大高さを制限する */
+  #contact .contact-2store img,
+  #contact2 .contact-2store img {
+    max-width: 100%;      /* 親要素の幅を超えない */
+    height: auto;
+    max-height: 200px;    /* 好きな高さに制限。調整必須 */
+    object-fit: contain;
+  }
+}
   /* ===== QA（初期は閉じる／開いたliだけ表示） ===== */
   .qa_content .qa-content .qa__item-answer{ display:none; }
   .qa_content .qa-content li.is-open .qa__item-answer{ display:block; }
