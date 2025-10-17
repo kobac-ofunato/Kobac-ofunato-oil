@@ -89,13 +89,14 @@
     body{ padding-bottom:0 !important; background:#fff !important; }
   }
 
-/* ===== 電話バナー（画像）の見た目を統一：#contact & #contact2 ===== */
+/* ===== 電話バナー（上下均等・見た目統一） ===== */
 #contact .contact-2store,
 #contact2 .contact-2store {
-  padding: 86px 0; /* PCで上下の余白を完全に統一 */
+  padding-top: 86px;
+  padding-bottom: 86px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 #contact .contact-2store a,
@@ -110,19 +111,20 @@
   display: block;
   width: 100%;
   height: auto;
-  margin: 0 auto;
 }
 
+/* 2回目のセクションにも個別高さ調整可 */
 #contact2 {
-  margin-top: 20px; /* 必要なら調整OK */
+  margin-top: 20px;
 }
 
-/* ===== スマホ版調整 ===== */
+/* ===== SP調整：上下均等 + flex無効化で中央ズレ回避 ===== */
 @media (max-width: 767px) {
   #contact .contact-2store,
   #contact2 .contact-2store {
-    padding: 60px 0; /* スマホでは少し小さめでも視覚中央を保つ */
-    display: block;  /* フレックス解除：上下中央寄せ不要 */
+    padding-top: 60px;
+    padding-bottom: 60px;
+    display: block;
   }
 
   #contact .contact-2store a,
