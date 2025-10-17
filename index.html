@@ -89,60 +89,32 @@
     body{ padding-bottom:0 !important; background:#fff !important; }
   }
 
-/* 基本揃え */
+/* contact2 にも contact と同じ上下マージンを付与 */
+#contact2 {
+  margin-top: 66px;
+  margin-bottom: 66px; /* contact 側と合わせる */
+}
+
+/* contact-2store の下マージン補正（30px） を両方に適用 */
 #contact .contact-2store,
 #contact2 .contact-2store {
-  /* まず大枠を揃える */
-  padding-top: 80px;
-  padding-bottom: 80px;
-  text-align: center;  /* flex 使うなら justify/align も可 */
+  margin-bottom: 30px;
 }
 
-/* リンク部分 */
-#contact .contact-2store a,
-#contact2 .contact-2store a {
-  display: inline-block;
-  max-width: 960px;
-  width: 100%;
-  margin: 0 auto;
+/* step_content との間の余白を補正 */
+#step_content {
+  padding-bottom: 75px; /* 元の上パディングと同様に保つか少し減らす */
 }
 
-/* 画像 */
-#contact .contact-2store img,
-#contact2 .contact-2store img {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 0 auto;
-}
-
-/* 2回目のセクション上マージン（元サイトも使ってる可能性あり） */
-#contact2 {
-  margin-top: 20px; /* 必要に応じて調整 */
-}
-
-/* ========== SP 微調整 ========== */
+/* SP時の補正 */
 @media (max-width: 767px) {
-  #contact .contact-2store,
-  #contact2 .contact-2store {
-    padding-top: 60px;
-    padding-bottom: 60px;
+  #contact2 {
+    margin-top: 8vw;  /* 元サイトで使っている contact の margin-top を真似る */
+    margin-bottom: 8vw;
   }
 
-  #contact .contact-2store a,
-  #contact2 .contact-2store a {
-    max-width: 90vw; /* 画面に合わせる */
-  }
-}
-
-/* さらに個別の微調整 */
-/* 例：2回目の下パディングを少し少なめに */
-#contact2 .contact-2store {
-  padding-bottom: 75px; /* 上の80〜下75 など微妙な差を詰める */
-}
-@media (max-width: 767px) {
-  #contact2 .contact-2store {
-    padding-bottom: 50px; /* SP時も少し差を調整 */
+  #step_content {
+    padding-bottom: 8vw; /* 元サイトのSP設定と合わせる */
   }
 }
   /* ===== QA（初期は閉じる／開いたliだけ表示） ===== */
