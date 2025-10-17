@@ -90,30 +90,37 @@
   }
 
 /* ===== 電話バナー（画像）の見た目を統一：#contactのみ ===== */
-#contact .contact-2store {
-  padding: 40px 0;
-  text-align: center; /* 中央揃え（画像のaタグに使える） */
+#contact .contact-2store,
+#contact2 .contact-2store {
+  padding: 20px 0;
 }
 
-#contact .contact-2store a {
-  display: inline-block; /* text-alignの影響を受けるように */
-  max-width: 1000px;
-  width: 100%;
+#contact .contact-2store a,
+#contact2 .contact-2store a {
+  display: block;
+  max-width: 960px;
+  margin: 0 auto;
 }
-    
-#contact .contact-2store img {
+
+#contact .contact-2store img,
+#contact2 .contact-2store img {
+  display: block;
   width: 100%;
   height: auto;
-  display: block;
-  margin: 0 auto; /* 念のため中央寄せ */
 }
-    
+
+#contact2 {
+  margin-top: 20px; /* 必要に応じて調整 */
+}
+
 @media (max-width: 767px) {
-  #contact .contact-2store {
-    padding: 24px 0;
+  #contact .contact-2store,
+  #contact2 .contact-2store {
+    padding: 12px 0;
   }
 
-  #contact .contact-2store a {
+  #contact .contact-2store a,
+  #contact2 .contact-2store a {
     max-width: 680px;
   }
 }
