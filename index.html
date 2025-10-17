@@ -91,25 +91,23 @@
 
 /* ===== 電話バナー（画像）の見た目を統一：#contactのみ ===== */
 #contact .contact-2store {
-  padding: 40px 0; /* 広げたい場合は数値を調整 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 40px 0;
+  text-align: center; /* 中央揃え（画像のaタグに使える） */
 }
 
 #contact .contact-2store a {
-  display: block;
-  max-width: 1000px; /* 必要なら広げる */
-  margin: 0 auto;
+  display: inline-block; /* text-alignの影響を受けるように */
+  max-width: 1000px;
+  width: 100%;
 }
-
+    
 #contact .contact-2store img {
-  display: block;
   width: 100%;
   height: auto;
-  object-fit: contain; /* 画像がはみ出さないように */
+  display: block;
+  margin: 0 auto; /* 念のため中央寄せ */
 }
-
+    
 @media (max-width: 767px) {
   #contact .contact-2store {
     padding: 24px 0;
@@ -119,7 +117,6 @@
     max-width: 680px;
   }
 }
-
   /* ===== QA（初期は閉じる／開いたliだけ表示） ===== */
   .qa_content .qa-content .qa__item-answer{ display:none; }
   .qa_content .qa-content li.is-open .qa__item-answer{ display:block; }
