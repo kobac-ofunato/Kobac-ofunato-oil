@@ -95,9 +95,15 @@
   margin-bottom: 66px; /* contact 側と合わせる */
 }
 
+#contact3 {
+  margin-top: 66px;
+  margin-bottom: 66px; /* contact 側と合わせる */
+}
+
 /* contact-2store の下マージン補正（30px） を両方に適用 */
 #contact .contact-2store,
-#contact2 .contact-2store {
+#contact2 .contact-2store
+#contact3 .contact-2store {
   margin-bottom: 30px;
 }
 
@@ -112,7 +118,13 @@
     margin-top: 8vw;  /* 元サイトで使っている contact の margin-top を真似る */
     margin-bottom: 8vw;
   }
-
+  
+@media (max-width: 767px) {
+  #contact3 {
+    margin-top: 8vw;  /* 元サイトで使っている contact の margin-top を真似る */
+    margin-bottom: 8vw;
+  }
+  
   #step_content {
     padding-bottom: 8vw; /* 元サイトのSP設定と合わせる */
   }
@@ -127,7 +139,28 @@
   }
 }
 @media (max-width: 767px) {
+#contact3 .contact-2store img {
+    max-width: 87vw;      /* 幅を画面の90%に制限（必要に応じて調整） */
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+  }
+}
+  
+@media (max-width: 767px) {
   #contact2 .contact-2store {
+    text-align: center;
+  }
+
+  #contact2 .contact-2store a {
+    display: inline-block;
+    width: auto;
+    max-width: 100%;
+  }
+}
+@media (max-width: 767px) {
+  #contact3 .contact-2store {
     text-align: center;
   }
 
@@ -367,8 +400,8 @@
     </div>
   </section>
 
-   <!-- 2回目の電話セクション -->
-<section id="contact2" class="contact">
+   <!-- 3回目の電話セクション -->
+<section id="contact3" class="contact">
   <div class="inner">
     <div class="contact-2store">
       <a href="tel:0120-589-196">
