@@ -220,6 +220,26 @@
   margin: 0 auto;
   object-fit: contain;
 }
+#voice_content ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px; /* 必要に応じて調整 */
+  padding: 0;
+  margin: 0 auto;
+  list-style: none;
+}
+
+#voice_content ul li {
+  flex: 0 1 calc(50% - 12px); /* 横2枚、間に隙間 */
+  text-align: center;
+}
+
+#voice_content ul img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
   </style>
 </head>
 
