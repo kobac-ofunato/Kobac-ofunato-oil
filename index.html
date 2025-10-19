@@ -31,9 +31,6 @@
   <style id="kobac-custom">
   :root{ --kobac-red:#FF0000; }
 
-  /* メール導線は非表示（電話誘導のみ） */
-  .pc-mail-btn, .contact__cont.mail, .mail-btn { display:none !important; }
-
   /* キャンペーン帯の背景色だけ指定（他はテーマに任せる） */
   #campaign{ background:var(--kobac-red); color:#fff; }
 
@@ -181,9 +178,17 @@
 
   /* ===== 固定TELバー（SPのみ表示）— 緑(#39B54A)・高さUP・安全域対応 ===== */
   a.sticky-tel{
-    position:fixed; left:0; right:0; bottom:0;
-    display:flex; align-items:center; justify-content:center;
-    background:#39B54A; color:#fff; text-decoration:none; font-weight:800;
+    position:fixed; 
+    left:0; 
+    right:0; 
+    bottom:0;
+    display:flex; 
+    align-items:center; 
+    justify-content:center;
+    background:#39B54A; 
+    color:#fff; 
+    text-decoration:none;
+    font-weight:800;
     min-height:74px;           /* すこし高め（元サイトの赤帯を隠す） */
     padding:0 16px;
     padding-bottom:calc(env(safe-area-inset-bottom,0) + 0px);
@@ -193,6 +198,41 @@
   @media (min-width: 768px){
     a.sticky-tel{ display:none !important; } /* PCは非表示 */
   }    
+  /* ===== スマホ固定：電話＋メールボタン横並び ===== */
+.sticky-sp-buttons {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: #39B54A;
+  padding: 6px 0;
+  box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.15);
+}
+
+.sticky-sp-buttons button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sticky-sp-buttons img {
+  height: 56px;
+  width: auto;
+  display: block;
+}
+
+/* PCは非表示 */
+@media (min-width: 768px) {
+  .sticky-sp-buttons {
+    display: none !important;
+  }
+}
   </style>
 </head>
 
