@@ -243,23 +243,26 @@
     
 @media (max-width: 767px) {
   #voice_content ul {
-    display: block !important; /* flexやgridを無効化して1列にする */
+    display: block;
     padding: 0;
-    text-align: center;
+    margin: 0 auto;
+    list-style: none;
   }
 
   #voice_content ul li {
-    display: inline-block; 
-    width: 100% !important;
+    display: block;
+    width: 87vw; /* または 100% にしてもOK */
     margin: 0 auto 16px;
     text-align: center;
   }
 
   #voice_content ul li img {
-    width: 87vw;     /* 他と揃える or 必要に応じて調整 */
+    width: 100%;
     height: auto;
+    display: block;
   }
 }
+
 #point03 .present-img {
   display: block;
   width: 100%;
