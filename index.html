@@ -483,7 +483,22 @@
   })();
   </script>
 
-  <!-- SP固定TEL -->
-  <a href="tel:0120-589-196" class="sticky-tel" aria-label="今すぐ電話（0120-589-196）">📞 今すぐ電話</a>
+  <!-- スマホ固定：電話＋メールボタン -->
+<div class="contact-nav sticky-sp-buttons">
+  <button class="tel-btn">
+    <a href="tel:0120-589-196" onclick="gtag('event', 'teltap', {'event_category': 'tel','event_label': 'teltap_ofunato'});">
+      <img src="images/sp-tel-btn.png" alt="電話で問い合わせ">
+    </a>
+  </button><!--tel-btn-->
+
+  <button class="mail-btn">
+    <a href="https://example.com/reserve" onclick="gtag('event', 'bnrin_click', {'event_category': 'bnr','event_label': 'reserve_click'})">
+      <picture class="mail-img">
+        <source srcset="images/pc-mail-btn.png" media="(min-width: 768px)">
+        <img src="images/sp-mail-btn.png" alt="メールで問い合わせ">
+      </picture>
+    </a>
+  </button><!--mail-btn-->
+</div><!--contact-nav-->
 </body>
 </html>
