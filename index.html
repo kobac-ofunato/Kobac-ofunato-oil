@@ -240,6 +240,24 @@
   height: auto;
   display: block;
 }
+    
+@media (max-width: 767px) {
+  #voice_content ul {
+    display: block !important; /* flexやgridを無効化して1列にする */
+    padding: 0;
+  }
+
+  #voice_content ul li {
+    width: 100% !important;
+    margin: 0 auto 16px;
+    text-align: center;
+  }
+
+  #voice_content ul li img {
+    width: 87vw;     /* 他と揃える or 必要に応じて調整 */
+    height: auto;
+  }
+}
 #point03 .present-img {
   display: block;
   width: 100%;
@@ -249,9 +267,11 @@
 }
 
 #point03 .present-img img {
-  width: 100%;
+  max-width: 100%;
   height: auto;
   display: block;
+  margin: 0 auto;
+  object-fit: contain;
 }
   </style>
 </head>
