@@ -479,7 +479,9 @@ html, body {
           <li>
             <div class="qa__item-question">
               <div class="qa__item-question-p"><img src="images/q.svg" alt="Q"> なぜエンジンオイルは必要なの？</div>
-              <div class="qa__item--open"></div>
+              <div class="qa__item--open">
+                <img src="images/close.svg" alt="開くアイコン">
+              </div>
             </div>
             <div class="qa__item-answer">
               <p>金属表面の保護、金属同士の摩擦を軽減するためです。</p>
@@ -488,7 +490,9 @@ html, body {
           <li>
             <div class="qa__item-question">
               <div class="qa__item-question-p"><img src="images/q.svg" alt="Q"> エンジンオイルにはどのような働きがあるの？</div>
-              <div class="qa__item--open"></div>
+              <div class="qa__item--open">
+                <img src="images/close.svg" alt="開くアイコン">
+              </div>
             </div>
             <div class="qa__item-answer">
               <p>潤滑作用・冷却作用・密封作用・防錆作用・清浄作用があります。</p>
@@ -497,7 +501,9 @@ html, body {
           <li>
             <div class="qa__item-question">
               <div class="qa__item-question-p"><img src="images/q.svg" alt="Q"> エンジンオイルはいつ交換したら良いの？</div>
-              <div class="qa__item--open"></div>
+              <div class="qa__item--open">
+                <img src="images/close.svg" alt="開くアイコン">
+              </div>
             </div>
             <div class="qa__item-answer">
               <p>自動車メーカーは必要最低限の性能を保つことができる距離を、エンジンオイルの交換距離として推進しています。一般的には6ヶ月又は5,000km毎が望ましいですがシビアコンディション(過酷な走条件)では、通常より短いサイクルのオイル交換条件を推奨しています。</p>
@@ -506,7 +512,9 @@ html, body {
           <li>
             <div class="qa__item-question">
               <div class="qa__item-question-p"><img src="images/q.svg" alt="Q"> エンジンオイルって減るの？</div>
-              <div class="qa__item--open"></div>
+              <div class="qa__item--open">
+                <img src="images/close.svg" alt="開くアイコン">
+              </div>
             </div>
             <div class="qa__item-answer">
               <p>エンジンオイルは、走行するにつれて燃料と一緒に燃やされて排出されるため、徐々に量が減ってしまいます。一回の走行で消費されるエンジンオイルの量はごく少量ですが、車や走行状況によって変わります。量が減りすぎるとエンジンやその他周辺器機のトラブルが発生する危険性もありますので注意が必要です。厳しい運転条件(悪路、山道、登降坂路、急加減速の繰り返し、エンジンオイルの高回転使用頻度が高いなど)での走行は、通常と比べてエンジンオイルの消費が早くなることがあります。</p>
@@ -515,7 +523,9 @@ html, body {
           <li>
             <div class="qa__item-question">
               <div class="qa__item-question-p"><img src="images/q.svg" alt="Q"> 粘度グレードってなに？</div>
-              <div class="qa__item--open"></div>
+              <div class="qa__item--open">
+                <img src="images/close.svg" alt="開くアイコン">
+              </div>
             </div>
             <div class="qa__item-answer">
               <p>オイルの硬さや軟らかさを、一般的なSAE粘度分類で表します。SAE粘度分類は低温環境と高温環境の2つのグループに分け、低温環境には「W」を付けて区別しています。さらにそれぞれのグループ内で細かに分類しています。</p>
@@ -575,13 +585,20 @@ html, body {
 
   <!-- QAアコーディオン（1本に統合） -->
   <script id="qa-accordion">
-  (function () {
-    function toggle(li) {
-      if (!li) return;
-      li.classList.toggle('is-open');
-      const btn = li.querySelector('.qa__item-question');
-      if (btn) btn.setAttribute('aria-expanded', li.classList.contains('is-open') ? 'true' : 'false');
-    }
+  function toggle(li) {
+  if (!li) return;
+  li.classList.toggle('is-open');
+
+  const btn = li.querySelector('.qa__item-question');
+  if (btn) btn.setAttribute('aria-expanded', li.classList.contains('is-open') ? 'true' : 'false');
+
+  // アイコン切り替え処理
+  const icon = li.querySelector('.qa__item--open img');
+  if (icon) {
+    icon.src = li.classList.contains('is-open') ? 'images/open.svg' : 'images/close.svg';
+    icon.alt = li.classList.contains('is-open') ? '閉じるアイコン' : '開くアイコン';
+  }
+}
 
     function onPress(e) {
       const q = e.target.closest('.qa_content .qa__item-question');
