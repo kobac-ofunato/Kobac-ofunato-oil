@@ -585,21 +585,22 @@ html, body {
 
   <!-- QAアコーディオン（1本に統合） -->
   <script id="qa-accordion">
-  function toggle(li) {
+function toggle(li) {
   if (!li) return;
-  li.classList.toggle('is-open');
+  const isOpen = li.classList.toggle('is-open');
 
   const btn = li.querySelector('.qa__item-question');
-  if (btn) btn.setAttribute('aria-expanded', li.classList.contains('is-open') ? 'true' : 'false');
+  if (btn) btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 
-  // アイコン切り替え処理
-  const icon = li.querySelector('.qa__item--open img');
-  if (icon) {
-    icon.src = li.classList.contains('is-open') ? 'images/open.svg' : 'images/close.svg';
-    icon.alt = li.classList.contains('is-open') ? '閉じるアイコン' : '開くアイコン';
+  const iconWrapper = li.querySelector('.qa__item--open');
+  if (iconWrapper) {
+    const icon = iconWrapper.querySelector('img');
+    if (icon) {
+      icon.src = isOpen ? 'images/open.svg' : 'images/close.svg';
+      icon.alt = isOpen ? '閉じるアイコン' : '開くアイコン';
+    }
   }
 }
-
     function onPress(e) {
       const q = e.target.closest('.qa_content .qa__item-question');
       if (!q) return;
