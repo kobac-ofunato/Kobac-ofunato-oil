@@ -284,6 +284,24 @@ html, body {
   overflow-y: visible !important;
 }
 
+.contact-2store {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px; /* ボタン間の余白 */
+}
+
+.contact-2store a {
+  display: inline-block;
+}
+
+.contact-2store img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  display: block;
+}
+
   </style>
 </head>
 
@@ -347,17 +365,16 @@ html, body {
     </div>
   </section>
 
-  <!-- 1回目の電話セクション -->
-<section id="contact" class="contact">
-  <div class="inner">
-    <div class="contact-2store">
-      <a href="tel:0120-589-196">
-        <img src="images/conact01.png" class="is-pc" alt="電話で問い合わせ">
-        <img src="images/conact01_sp.png" class="is-sp" alt="電話で問い合わせ">
-      </a>
-    </div>
-  </div>
-</section>
+<div class="contact-2store">
+  <a href="tel:0120-589-196">
+    <img src="images/conact01.png" class="is-pc" alt="電話で問い合わせ">
+    <img src="images/conact01_sp.png" class="is-sp" alt="電話で問い合わせ">
+  </a>
+  <a href="https://kobac-ofunato.com/contact_inquiry" class="contact-reserve-btn">
+    <img src="images/pc-contact-btn.svg" class="is-pc" alt="WEB予約">
+    <img src="images/sp-contact-btn.svg" class="is-sp" alt="WEB予約">
+  </a>
+</div>
 
   <section id="engine" class="engine">
     <div class="inner">
